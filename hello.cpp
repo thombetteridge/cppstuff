@@ -1,8 +1,8 @@
 #include <iostream>
-
 #include <vector>
 
-int main() {
+auto main() -> int
+{
     std::cout << "hello world\n";
 
     std::vector<int> v;
@@ -11,10 +11,9 @@ int main() {
         v.push_back(i);
     }
 
-    for (auto &i : v) {
+    for (auto& i : v) {
         std::cout << i << "\n";
     }
 
     return 0;
 }
-
