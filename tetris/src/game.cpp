@@ -1,9 +1,5 @@
-
-#include <raylib-cpp.hpp>
-#include <vector>
-
-#include "blocks.cpp"
 #include "game.hpp"
+#include "blocks.cpp"
 
 Game::Game()
 {

@@ -1,5 +1,6 @@
+#pragma once
 
-#include <raylib-cpp.hpp>
+#include "../include/raylib-cpp.hpp"
 #include <vector>
 
 #include "block.hpp"

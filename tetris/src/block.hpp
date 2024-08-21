@@ -6,7 +6,7 @@
 #include "grid.hpp"
 #include "position.hpp"
 
-#include <raylib-cpp.hpp>
+#include "../include/raylib-cpp.hpp"
 
 class Block {
 public:
