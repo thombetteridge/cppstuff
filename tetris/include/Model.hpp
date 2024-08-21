@@ -72,16 +72,14 @@ class Model : public ::Model {
     GETTERSETTER(::BoneInfo*, Bones, bones)
     GETTERSETTER(::Transform*, BindPose, bindPose)
 
-    auto operator=(const ::Model& model) -> Model&
-    {
+    Model& operator=(const ::Model& model) {
         set(model);
         return *this;
     }
 
-    auto operator=(const Model&) -> Model& = delete;
+    Model& operator=(const Model&) = delete;
 
-    auto operator=(Model&& other) noexcept -> Model&
-    {
+    Model& operator=(Model&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -115,8 +113,7 @@ class Model : public ::Model {
     /**
      * Set material for a mesh
      */
-    inline auto SetMeshMaterial(int meshId, int materialId) -> Model&
-    {
+    inline Model& SetMeshMaterial(int meshId, int materialId) {
         ::SetModelMeshMaterial(this, meshId, materialId);
         return *this;
     }
@@ -124,8 +121,7 @@ class Model : public ::Model {
     /**
      * Update model animation pose
      */
-    inline auto UpdateAnimation(const ::ModelAnimation& anim, int frame) -> Model&
-    {
+    inline Model& UpdateAnimation(const ::ModelAnimation& anim, int frame) {
         ::UpdateModelAnimation(*this, anim, frame);
         return *this;
     }
@@ -133,8 +129,7 @@ class Model : public ::Model {
     /**
      * Check model animation skeleton match
      */
-    inline auto IsModelAnimationValid(const ::ModelAnimation& anim) const -> bool
-    {
+    inline bool IsModelAnimationValid(const ::ModelAnimation& anim) const {
         return ::IsModelAnimationValid(*this, anim);
     }
 
@@ -183,8 +178,7 @@ class Model : public ::Model {
     /**
      * Compute model bounding box limits (considers all meshes)
      */
-    inline auto GetBoundingBox() const -> BoundingBox
-    {
+    inline BoundingBox GetBoundingBox() const {
         return ::GetModelBoundingBox(*this);
     }
 
@@ -198,8 +192,7 @@ class Model : public ::Model {
     /**
      * Determines whether or not the Model has data in it.
      */
-    auto IsReady() const -> bool
-    {
+    bool IsReady() const {
         return ::IsModelReady(*this);
     }
 

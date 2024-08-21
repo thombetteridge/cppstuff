@@ -30,8 +30,7 @@ class BoundingBox : public ::BoundingBox {
     GETTERSETTER(::Vector3, Min, min)
     GETTERSETTER(::Vector3, Max, max)
 
-    auto operator=(const ::BoundingBox& box) -> BoundingBox&
-    {
+    BoundingBox& operator=(const ::BoundingBox& box) {
         set(box);
         return *this;
     }
@@ -46,32 +45,28 @@ class BoundingBox : public ::BoundingBox {
     /**
      * Detect collision between two boxes
      */
-    inline auto CheckCollision(const ::BoundingBox& box2) const -> bool
-    {
+    inline bool CheckCollision(const ::BoundingBox& box2) const {
         return CheckCollisionBoxes(*this, box2);
     }
 
     /**
      * Detect collision between box and sphere
      */
-    inline auto CheckCollision(::Vector3 center, float radius) const -> bool
-    {
+    inline bool CheckCollision(::Vector3 center, float radius) const {
         return CheckCollisionBoxSphere(*this, center, radius);
     }
 
     /**
      * Detect collision between ray and bounding box
      */
-    inline auto CheckCollision(const ::Ray& ray) const -> bool
-    {
+    inline bool CheckCollision(const ::Ray& ray) const {
         return GetRayCollisionBox(ray, *this).hit;
     }
 
     /**
      * Get collision information between ray and bounding box
      */
-    inline auto GetCollision(const ::Ray& ray) const -> RayCollision
-    {
+    inline RayCollision GetCollision(const ::Ray& ray) const {
         return GetRayCollisionBox(ray, *this);
     }
 

@@ -54,8 +54,7 @@ class RayCollision : public ::RayCollision {
         set(::GetRayCollisionTriangle(ray, p1, p2, p3));
     }
 
-    auto operator=(const ::RayCollision& ray) -> RayCollision&
-    {
+    RayCollision& operator=(const ::RayCollision& ray) {
         set(ray);
         return *this;
     }

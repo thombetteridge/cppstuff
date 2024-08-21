@@ -41,8 +41,7 @@ class Shader : public ::Shader {
      *
      * @see ::LoadShader
      */
-    static auto Load(const std::string& vsFileName, const std::string& fsFileName) -> ::Shader
-    {
+    static ::Shader Load(const std::string& vsFileName, const std::string& fsFileName) {
         return ::LoadShader(vsFileName.c_str(), fsFileName.c_str());
     }
 
@@ -51,24 +50,21 @@ class Shader : public ::Shader {
      *
      * @see ::LoadShaderFromMemory
      */
-    static auto LoadFromMemory(const std::string& vsCode, const std::string& fsCode) -> ::Shader
-    {
+    static ::Shader LoadFromMemory(const std::string& vsCode, const std::string& fsCode) {
         return ::LoadShaderFromMemory(vsCode.c_str(), fsCode.c_str());
     }
 
     GETTERSETTER(unsigned int, Id, id)
     GETTERSETTER(int*, Locs, locs)
 
-    auto operator=(const ::Shader& shader) -> Shader&
-    {
+    Shader& operator=(const ::Shader& shader) {
         set(shader);
         return *this;
     }
 
-    auto operator=(const Shader&) -> Shader& = delete;
+    Shader& operator=(const Shader&) = delete;
 
-    auto operator=(Shader&& other) noexcept -> Shader&
-    {
+    Shader& operator=(Shader&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -101,8 +97,7 @@ class Shader : public ::Shader {
     /**
      * Begin custom shader drawing.
      */
-    inline auto BeginMode() -> Shader&
-    {
+    inline Shader& BeginMode() {
         ::BeginShaderMode(*this);
         return *this;
     }
@@ -110,8 +105,7 @@ class Shader : public ::Shader {
     /**
      * End custom shader drawing (use default shader).
      */
-    inline auto EndMode() -> Shader&
-    {
+    inline Shader& EndMode() {
         ::EndShaderMode();
         return *this;
     }
@@ -121,8 +115,7 @@ class Shader : public ::Shader {
      *
      * @see GetShaderLocation()
      */
-    inline auto GetLocation(const std::string& uniformName) const -> int
-    {
+    inline int GetLocation(const std::string& uniformName) const {
         return ::GetShaderLocation(*this, uniformName.c_str());
     }
 
@@ -131,8 +124,7 @@ class Shader : public ::Shader {
      *
      * @see GetShaderLocationAttrib()
      */
-    inline auto GetLocationAttrib(const std::string& attribName) const -> int
-    {
+    inline int GetLocationAttrib(const std::string& attribName) const {
         return ::GetShaderLocationAttrib(*this, attribName.c_str());
     }
 
@@ -141,8 +133,7 @@ class Shader : public ::Shader {
      *
      * @see SetShaderValue()
      */
-    inline auto SetValue(int uniformLoc, const void* value, int uniformType) -> Shader&
-    {
+    inline Shader& SetValue(int uniformLoc, const void* value, int uniformType) {
         ::SetShaderValue(*this, uniformLoc, value, uniformType);
         return *this;
     }
@@ -152,8 +143,7 @@ class Shader : public ::Shader {
      *
      * @see SetShaderValueV()
      */
-    inline auto SetValue(int uniformLoc, const void* value, int uniformType, int count) -> Shader&
-    {
+    inline Shader& SetValue(int uniformLoc, const void* value, int uniformType, int count) {
         ::SetShaderValueV(*this, uniformLoc, value, uniformType, count);
         return *this;
     }
@@ -163,8 +153,7 @@ class Shader : public ::Shader {
      *
      * @see SetShaderValueMatrix()
      */
-    inline auto SetValue(int uniformLoc, const ::Matrix& mat) -> Shader&
-    {
+    inline Shader& SetValue(int uniformLoc, const ::Matrix& mat) {
         ::SetShaderValueMatrix(*this, uniformLoc, mat);
         return *this;
     }
@@ -174,8 +163,7 @@ class Shader : public ::Shader {
      *
      * @see SetShaderValueTexture()
      */
-    inline auto SetValue(int uniformLoc, const ::Texture2D& texture) -> Shader&
-    {
+    inline Shader& SetValue(int uniformLoc, const ::Texture2D& texture) {
         ::SetShaderValueTexture(*this, uniformLoc, texture);
         return *this;
     }
@@ -183,8 +171,7 @@ class Shader : public ::Shader {
     /**
      * Retrieves whether or not the shader is ready.
      */
-    auto IsReady() const -> bool
-    {
+    bool IsReady() const {
         return id != 0 && locs != nullptr;
     }
 

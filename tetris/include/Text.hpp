@@ -121,21 +121,18 @@ class Text {
     /**
      * Measure string width for default font
      */
-    inline auto Measure() -> int
-    {
+    inline int Measure() {
         return ::MeasureText(text.c_str(), static_cast<int>(fontSize));
     }
 
     /**
      * Measure string size for Font
      */
-    inline auto MeasureEx() -> Vector2
-    {
+    inline Vector2 MeasureEx() {
         return ::MeasureTextEx(font, text.c_str(), fontSize, spacing);
     }
 
-    auto operator=(const Text& other) -> Text&
-    {
+    Text& operator=(const Text& other) {
         if (this == &other) {
             return *this;
         }

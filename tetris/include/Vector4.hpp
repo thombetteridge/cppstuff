@@ -34,27 +34,23 @@ class Vector4 : public ::Vector4 {
     GETTERSETTER(float, Z, z)
     GETTERSETTER(float, W, w)
 
-    auto operator=(const ::Vector4& vector4) -> Vector4&
-    {
+    Vector4& operator=(const ::Vector4& vector4) {
         set(vector4);
         return *this;
     }
 
-    auto operator==(const ::Vector4& other) -> bool
-    {
+    bool operator==(const ::Vector4& other) {
         return x == other.x
             && y == other.y
             && z == other.z
             && w == other.w;
     }
 
-    auto operator!=(const ::Vector4& other) -> bool
-    {
+    bool operator!=(const ::Vector4& other) {
         return !(*this == other);
     }
 
-    inline auto ToRectangle() -> ::Rectangle
-    {
+    inline ::Rectangle ToRectangle() {
         return {x, y, z, w};
     }
 
@@ -63,48 +59,39 @@ class Vector4 : public ::Vector4 {
     }
 
 #ifndef RAYLIB_CPP_NO_MATH
-    inline auto Multiply(const ::Vector4& vector4) const -> Vector4
-    {
+    inline Vector4 Multiply(const ::Vector4& vector4) const {
         return QuaternionMultiply(*this, vector4);
     }
 
-    inline auto operator*(const ::Vector4& vector4) const -> Vector4
-    {
+    inline Vector4 operator*(const ::Vector4& vector4) const {
         return QuaternionMultiply(*this, vector4);
     }
 
-    inline auto Lerp(const ::Vector4& vector4, float amount) const -> Vector4
-    {
+    inline Vector4 Lerp(const ::Vector4& vector4, float amount) const {
         return QuaternionLerp(*this, vector4, amount);
     }
 
-    inline auto Nlerp(const ::Vector4& vector4, float amount) const -> Vector4
-    {
+    inline Vector4 Nlerp(const ::Vector4& vector4, float amount) const {
         return QuaternionNlerp(*this, vector4, amount);
     }
 
-    inline auto Slerp(const ::Vector4& vector4, float amount) const -> Vector4
-    {
+    inline Vector4 Slerp(const ::Vector4& vector4, float amount) const {
         return QuaternionSlerp(*this, vector4, amount);
     }
 
-    inline auto ToMatrix() const -> Matrix
-    {
+    inline Matrix ToMatrix() const {
         return QuaternionToMatrix(*this);
     }
 
-    inline auto Length() const -> float
-    {
+    inline float Length() const {
         return QuaternionLength(*this);
     }
 
-    inline auto Normalize() const -> Vector4
-    {
+    inline Vector4 Normalize() const {
         return QuaternionNormalize(*this);
     }
 
-    inline auto Invert() const -> Vector4
-    {
+    inline Vector4 Invert() const {
         return QuaternionInvert(*this);
     }
 
@@ -115,8 +102,7 @@ class Vector4 : public ::Vector4 {
     /**
      * Get the rotation angle and axis for a given quaternion
      */
-    auto ToAxisAngle() -> std::pair<Vector3, float>
-    {
+    std::pair<Vector3, float> ToAxisAngle() {
         Vector3 outAxis;
         float outAngle;
         QuaternionToAxisAngle(*this, &outAxis, &outAngle);
@@ -124,49 +110,40 @@ class Vector4 : public ::Vector4 {
         return std::pair<Vector3, float>(outAxis, outAngle);
     }
 
-    inline auto Transform(const ::Matrix& matrix) -> Vector4
-    {
+    inline Vector4 Transform(const ::Matrix& matrix) {
         return ::QuaternionTransform(*this, matrix);
     }
 
-    static inline auto Identity() -> Vector4
-    {
+    static inline Vector4 Identity() {
         return ::QuaternionIdentity();
     }
 
-    static inline auto FromVector3ToVector3(const ::Vector3& from, const ::Vector3& to) -> Vector4
-    {
+    static inline Vector4 FromVector3ToVector3(const ::Vector3& from , const ::Vector3& to) {
         return ::QuaternionFromVector3ToVector3(from , to);
     }
 
-    static inline auto FromMatrix(const ::Matrix& matrix) -> Vector4
-    {
+    static inline Vector4 FromMatrix(const ::Matrix& matrix) {
         return ::QuaternionFromMatrix(matrix);
     }
 
-    static inline auto FromAxisAngle(const ::Vector3& axis, const float angle) -> Vector4
-    {
+    static inline Vector4 FromAxisAngle(const ::Vector3& axis, const float angle) {
         return ::QuaternionFromAxisAngle(axis, angle);
     }
 
-    static inline auto FromEuler(const float yaw, const float pitch, const float roll) -> Vector4
-    {
+    static inline Vector4 FromEuler(const float yaw, const float pitch, const float roll) {
         return ::QuaternionFromEuler(yaw, pitch, roll);
     }
 
-    static inline auto FromEuler(const ::Vector3& vector3) -> Vector4
-    {
+    static inline Vector4 FromEuler(const ::Vector3& vector3) {
         return ::QuaternionFromEuler(vector3.x, vector3.y, vector3.z);
     }
 
-    inline auto ToEuler() -> Vector3
-    {
+    inline Vector3 ToEuler() {
         return ::QuaternionToEuler(*this);
     }
 #endif
 
-    inline auto ColorFromNormalized() const -> Color
-    {
+    inline Color ColorFromNormalized() const {
         return ::ColorFromNormalized(*this);
     }
 

@@ -53,88 +53,77 @@ class Mesh : public ::Mesh {
     /**
      * Generate polygonal mesh
      */
-    static auto Poly(int sides, float radius) -> ::Mesh
-    {
+    static ::Mesh Poly(int sides, float radius) {
         return ::GenMeshPoly(sides, radius);
     }
 
     /**
      * Generate plane mesh (with subdivisions)
      */
-    static auto Plane(float width, float length, int resX, int resZ) -> ::Mesh
-    {
+    static ::Mesh Plane(float width, float length, int resX, int resZ) {
         return ::GenMeshPlane(width, length, resX, resZ);
     }
 
     /**
      * Generate cuboid mesh
      */
-    static auto Cube(float width, float height, float length) -> ::Mesh
-    {
+    static ::Mesh Cube(float width, float height, float length) {
         return ::GenMeshCube(width, height, length);
     }
 
     /**
      * Generate sphere mesh (standard sphere)
      */
-    static auto Sphere(float radius, int rings, int slices) -> ::Mesh
-    {
+    static ::Mesh Sphere(float radius, int rings, int slices) {
         return ::GenMeshSphere(radius, rings, slices);
     }
 
     /**
      * Generate half-sphere mesh (no bottom cap)
      */
-    static auto HemiSphere(float radius, int rings, int slices) -> ::Mesh
-    {
+    static ::Mesh HemiSphere(float radius, int rings, int slices) {
         return ::GenMeshHemiSphere(radius, rings, slices);
     }
 
     /**
      * Generate cylinder mesh
      */
-    static auto Cylinder(float radius, float height, int slices) -> ::Mesh
-    {
+    static ::Mesh Cylinder(float radius, float height, int slices) {
         return ::GenMeshCylinder(radius, height, slices);
     }
 
     /**
      * Generate cone/pyramid mesh
      */
-    static auto Cone(float radius, float height, int slices) -> ::Mesh
-    {
+    static ::Mesh Cone(float radius, float height, int slices) {
         return ::GenMeshCone(radius, height, slices);
     }
 
     /**
      * Generate torus mesh
      */
-    static auto Torus(float radius, float size, int radSeg, int sides) -> ::Mesh
-    {
+    static ::Mesh Torus(float radius, float size, int radSeg, int sides) {
         return ::GenMeshTorus(radius, size, radSeg, sides);
     }
 
     /**
      * Generate trefoil knot mesh
      */
-    static auto Knot(float radius, float size, int radSeg, int sides) -> ::Mesh
-    {
+    static ::Mesh Knot(float radius, float size, int radSeg, int sides) {
         return ::GenMeshKnot(radius, size, radSeg, sides);
     }
 
     /**
      * Generate heightmap mesh from image data
      */
-    static auto Heightmap(const ::Image& heightmap, ::Vector3 size) -> ::Mesh
-    {
+    static ::Mesh Heightmap(const ::Image& heightmap, ::Vector3 size) {
         return ::GenMeshHeightmap(heightmap, size);
     }
 
     /**
      * Generate cubes-based map mesh from image data
      */
-    static auto Cubicmap(const ::Image& cubicmap, ::Vector3 cubeSize) -> ::Mesh
-    {
+    static ::Mesh Cubicmap(const ::Image& cubicmap, ::Vector3 cubeSize) {
         return ::GenMeshCubicmap(cubicmap, cubeSize);
     }
 
@@ -154,16 +143,14 @@ class Mesh : public ::Mesh {
     GETTERSETTER(unsigned int, VaoId, vaoId)
     GETTERSETTER(unsigned int *, VboId, vboId)
 
-    auto operator=(const ::Mesh& mesh) -> Mesh&
-    {
+    Mesh& operator=(const ::Mesh& mesh) {
         set(mesh);
         return *this;
     }
 
-    auto operator=(const Mesh&) -> Mesh& = delete;
+    Mesh& operator=(const Mesh&) = delete;
 
-    auto operator=(Mesh&& other) noexcept -> Mesh&
-    {
+    Mesh& operator=(Mesh&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -246,8 +233,7 @@ class Mesh : public ::Mesh {
     /**
      * Compute mesh bounding box limits
      */
-    inline auto BoundingBox() const -> raylib::BoundingBox
-    {
+    inline raylib::BoundingBox BoundingBox() const {
         return ::GetMeshBoundingBox(*this);
     }
 
@@ -261,8 +247,7 @@ class Mesh : public ::Mesh {
     /**
      * Compute mesh tangents
      */
-    inline auto GenTangents() -> Mesh&
-    {
+    inline Mesh& GenTangents() {
         ::GenMeshTangents(this);
         return *this;
     }
@@ -270,8 +255,7 @@ class Mesh : public ::Mesh {
     /**
      * Load model from generated mesh
      */
-    inline auto LoadModelFrom() const -> raylib::Model
-    {
+    inline raylib::Model LoadModelFrom() const {
         return ::LoadModelFromMesh(*this);
     }
 

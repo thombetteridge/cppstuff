@@ -30,21 +30,18 @@ class Vector3 : public ::Vector3 {
     GETTERSETTER(float, Y, y)
     GETTERSETTER(float, Z, z)
 
-    auto operator=(const ::Vector3& vector3) -> Vector3&
-    {
+    Vector3& operator=(const ::Vector3& vector3) {
         set(vector3);
         return *this;
     }
 
-    auto operator==(const ::Vector3& other) -> bool
-    {
+    bool operator==(const ::Vector3& other) {
         return x == other.x
             && y == other.y
             && z == other.z;
     }
 
-    auto operator!=(const ::Vector3& other) -> bool
-    {
+    bool operator!=(const ::Vector3& other) {
         return !(*this == other);
     }
 
@@ -52,21 +49,18 @@ class Vector3 : public ::Vector3 {
     /**
      * Add two vectors
      */
-    inline auto Add(const ::Vector3& vector3) -> Vector3
-    {
+    inline Vector3 Add(const ::Vector3& vector3) {
         return Vector3Add(*this, vector3);
     }
 
     /**
      * Add two vectors
      */
-    inline auto operator+(const ::Vector3& vector3) -> Vector3
-    {
+    inline Vector3 operator+(const ::Vector3& vector3) {
         return Vector3Add(*this, vector3);
     }
 
-    auto operator+=(const ::Vector3& vector3) -> Vector3&
-    {
+    Vector3& operator+=(const ::Vector3& vector3) {
         set(Vector3Add(*this, vector3));
 
         return *this;
@@ -75,21 +69,18 @@ class Vector3 : public ::Vector3 {
     /**
      * Subtract two vectors.
      */
-    inline auto Subtract(const ::Vector3& vector3) -> Vector3
-    {
+    inline Vector3 Subtract(const ::Vector3& vector3) {
         return Vector3Subtract(*this, vector3);
     }
 
     /**
      * Subtract two vectors.
      */
-    inline auto operator-(const ::Vector3& vector3) -> Vector3
-    {
+    inline Vector3 operator-(const ::Vector3& vector3) {
         return Vector3Subtract(*this, vector3);
     }
 
-    auto operator-=(const ::Vector3& vector3) -> Vector3&
-    {
+    Vector3& operator-=(const ::Vector3& vector3) {
         set(Vector3Subtract(*this, vector3));
 
         return *this;
@@ -98,40 +89,35 @@ class Vector3 : public ::Vector3 {
     /**
      * Negate provided vector (invert direction)
      */
-    inline auto Negate() -> Vector3
-    {
+    inline Vector3 Negate() {
         return Vector3Negate(*this);
     }
 
     /**
      * Negate provided vector (invert direction)
      */
-    inline auto operator-() -> Vector3
-    {
+    inline Vector3 operator-() {
         return Vector3Negate(*this);
     }
 
     /**
      * Multiply vector by vector
      */
-    inline auto Multiply(const ::Vector3& vector3) const -> Vector3
-    {
+    inline Vector3 Multiply(const ::Vector3& vector3) const {
         return Vector3Multiply(*this, vector3);
     }
 
     /**
      * Multiply vector by vector
      */
-    inline auto operator*(const ::Vector3& vector3) const -> Vector3
-    {
+    inline Vector3 operator*(const ::Vector3& vector3) const {
         return Vector3Multiply(*this, vector3);
     }
 
     /**
      * Multiply vector by vector
      */
-    auto operator*=(const ::Vector3& vector3) -> Vector3&
-    {
+    Vector3& operator*=(const ::Vector3& vector3) {
         set(Vector3Multiply(*this, vector3));
 
         return *this;
@@ -140,24 +126,21 @@ class Vector3 : public ::Vector3 {
     /**
      * Multiply vector by scalar
      */
-    inline auto Scale(const float scaler) const -> Vector3
-    {
+    inline Vector3 Scale(const float scaler) const {
         return Vector3Scale(*this, scaler);
     }
 
     /**
      * Multiply vector by scalar
      */
-    inline auto operator*(const float scaler) const -> Vector3
-    {
+    inline Vector3 operator*(const float scaler) const {
         return Vector3Scale(*this, scaler);
     }
 
     /**
      * Multiply vector by scalar
      */
-    auto operator*=(const float scaler) -> Vector3&
-    {
+    Vector3& operator*=(const float scaler) {
         set(Vector3Scale(*this, scaler));
 
         return *this;
@@ -166,24 +149,21 @@ class Vector3 : public ::Vector3 {
     /**
      * Divide vector by vector
      */
-    inline auto Divide(const ::Vector3& vector3) const -> Vector3
-    {
+    inline Vector3 Divide(const ::Vector3& vector3) const {
         return Vector3Divide(*this, vector3);
     }
 
     /**
      * Divide vector by vector
      */
-    inline auto operator/(const ::Vector3& vector3) const -> Vector3
-    {
+    inline Vector3 operator/(const ::Vector3& vector3) const {
         return Vector3Divide(*this, vector3);
     }
 
     /**
      * Divide vector by vector
      */
-    auto operator/=(const ::Vector3& vector3) -> Vector3&
-    {
+    Vector3& operator/=(const ::Vector3& vector3) {
         x /= vector3.x;
         y /= vector3.y;
         z /= vector3.z;
@@ -194,24 +174,21 @@ class Vector3 : public ::Vector3 {
     /**
      * Divide a vector by a value.
      */
-    inline auto Divide(const float div) const -> Vector3
-    {
+    inline Vector3 Divide(const float div) const {
         return ::Vector3{x / div, y / div, z / div};
     }
 
     /**
      * Divide a vector by a value.
      */
-    inline auto operator/(const float div) const -> Vector3
-    {
+    inline Vector3 operator/(const float div) const {
         return Divide(div);
     }
 
     /**
      * Divide a vector by a value.
      */
-    auto operator/=(const float div) -> Vector3&
-    {
+    Vector3& operator/=(const float div) {
         x /= div;
         y /= div;
         z /= div;
@@ -222,38 +199,31 @@ class Vector3 : public ::Vector3 {
     /**
      * Calculate vector length
      */
-    inline auto Length() const -> float
-    {
+    inline float Length() const {
         return Vector3Length(*this);
     }
 
-    inline auto Normalize() const -> Vector3
-    {
+    inline Vector3 Normalize() const {
         return Vector3Normalize(*this);
     }
 
-    inline auto DotProduct(const ::Vector3& vector3) -> float
-    {
+    inline float DotProduct(const ::Vector3& vector3) {
         return Vector3DotProduct(*this, vector3);
     }
 
-    inline auto Distance(const ::Vector3& vector3) const -> float
-    {
+    inline float Distance(const ::Vector3& vector3) const {
         return Vector3Distance(*this, vector3);
     }
 
-    inline auto Lerp(const ::Vector3& vector3, const float amount) const -> Vector3
-    {
+    inline Vector3 Lerp(const ::Vector3& vector3, const float amount) const {
         return Vector3Lerp(*this, vector3, amount);
     }
 
-    inline auto CrossProduct(const ::Vector3& vector3) const -> Vector3
-    {
+    inline Vector3 CrossProduct(const ::Vector3& vector3) const {
         return Vector3CrossProduct(*this, vector3);
     }
 
-    inline auto Perpendicular() const -> Vector3
-    {
+    inline Vector3 Perpendicular() const {
         return Vector3Perpendicular(*this);
     }
 
@@ -261,43 +231,35 @@ class Vector3 : public ::Vector3 {
         Vector3OrthoNormalize(this, vector3);
     }
 
-    inline auto Transform(const ::Matrix& matrix) const -> Vector3
-    {
+    inline Vector3 Transform(const ::Matrix& matrix) const {
         return Vector3Transform(*this, matrix);
     }
 
-    inline auto RotateByQuaternion(const ::Quaternion& quaternion) -> Vector3
-    {
+    inline Vector3 RotateByQuaternion(const ::Quaternion& quaternion) {
         return Vector3RotateByQuaternion(*this, quaternion);
     }
 
-    inline auto Reflect(const ::Vector3& normal) const -> Vector3
-    {
+    inline Vector3 Reflect(const ::Vector3& normal) const {
         return Vector3Reflect(*this, normal);
     }
 
-    inline auto Min(const ::Vector3& vector3) -> Vector3
-    {
+    inline Vector3 Min(const ::Vector3& vector3) {
         return Vector3Min(*this, vector3);
     }
 
-    inline auto Max(const ::Vector3& vector3) -> Vector3
-    {
+    inline Vector3 Max(const ::Vector3& vector3) {
         return Vector3Max(*this, vector3);
     }
 
-    inline auto Barycenter(const ::Vector3& a, const ::Vector3& b, const ::Vector3& c) -> Vector3
-    {
+    inline Vector3 Barycenter(const ::Vector3& a, const ::Vector3& b, const ::Vector3& c) {
         return Vector3Barycenter(*this, a, b, c);
     }
 
-    static inline auto Zero() -> Vector3
-    {
+    static inline Vector3 Zero() {
         return Vector3Zero();
     }
 
-    static inline auto One() -> Vector3
-    {
+    static inline Vector3 One() {
         return Vector3One();
     }
 #endif
@@ -363,8 +325,7 @@ class Vector3 : public ::Vector3 {
     /**
      * Detect collision between two spheres
      */
-    inline auto CheckCollision(float radius1, const ::Vector3& center2, float radius2) -> bool
-    {
+    inline bool CheckCollision(float radius1, const ::Vector3& center2, float radius2) {
         return CheckCollisionSpheres(*this, radius1, center2, radius2);
     }
 

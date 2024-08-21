@@ -36,8 +36,7 @@ class ModelAnimation : public ::ModelAnimation {
     /**
      * Load model animations from file
      */
-    static auto Load(const std::string& fileName) -> std::vector<ModelAnimation>
-    {
+    static std::vector<ModelAnimation> Load(const std::string& fileName) {
         unsigned int count = 0;
         ::ModelAnimation* modelAnimations = ::LoadModelAnimations(fileName.c_str(), &count);
         std::vector<ModelAnimation> mats(modelAnimations, modelAnimations + count);
@@ -52,16 +51,14 @@ class ModelAnimation : public ::ModelAnimation {
     GETTERSETTER(int, FrameCount, frameCount)
     GETTERSETTER(::Transform**, FramePoses, framePoses)
 
-    auto operator=(const ::ModelAnimation& model) -> ModelAnimation&
-    {
+    ModelAnimation& operator=(const ::ModelAnimation& model) {
         set(model);
         return *this;
     }
 
-    auto operator=(const ModelAnimation&) -> ModelAnimation& = delete;
+    ModelAnimation& operator=(const ModelAnimation&) = delete;
 
-    auto operator=(ModelAnimation&& other) noexcept -> ModelAnimation&
-    {
+    ModelAnimation& operator=(ModelAnimation&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -87,8 +84,7 @@ class ModelAnimation : public ::ModelAnimation {
     /**
      * Update model animation pose
      */
-    inline auto Update(const ::Model& model, int frame) -> ModelAnimation&
-    {
+    inline ModelAnimation& Update(const ::Model& model, int frame) {
         ::UpdateModelAnimation(model, *this, frame);
         return *this;
     }
@@ -96,8 +92,7 @@ class ModelAnimation : public ::ModelAnimation {
     /**
      * Check model animation skeleton match
      */
-    inline auto IsValid(const ::Model& model) const -> bool
-    {
+    inline bool IsValid(const ::Model& model) const {
         return ::IsModelAnimationValid(model, *this);
     }
 

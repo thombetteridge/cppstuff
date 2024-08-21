@@ -23,7 +23,7 @@ class Texture : public TextureUnmanaged {
     /**
      * Explicitly forbid copy assignment.
      */
-    auto operator=(const Texture&) -> Texture& = delete;
+    Texture& operator=(const Texture&) = delete;
 
     /**
      * Move constructor.
@@ -48,8 +48,7 @@ class Texture : public TextureUnmanaged {
     /**
      * Move assignment.
      */
-    auto operator=(Texture&& other) noexcept -> Texture&
-    {
+    Texture& operator=(Texture&& other) noexcept {
         if (this == &other) {
             return *this;
         }

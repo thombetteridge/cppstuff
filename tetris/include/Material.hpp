@@ -44,8 +44,7 @@ class Material : public ::Material {
     /**
      * Load materials from model file
      */
-    static auto Load(const std::string& fileName) -> std::vector<Material>
-    {
+    static std::vector<Material> Load(const std::string& fileName) {
         int count = 0;
         // TODO(RobLoach): Material::Load() possibly leaks the materials array.
         ::Material* materials = ::LoadMaterials(fileName.c_str(), &count);
@@ -57,16 +56,14 @@ class Material : public ::Material {
     // TODO(RobLoach): Resolve the Material params being a float[4].
     // GETTERSETTER(float[4], Params, params)
 
-    auto operator=(const ::Material& material) -> Material&
-    {
+    Material& operator=(const ::Material& material) {
         set(material);
         return *this;
     }
 
-    auto operator=(const Material&) -> Material& = delete;
+    Material& operator=(const Material&) = delete;
 
-    auto operator=(Material&& other) noexcept -> Material&
-    {
+    Material& operator=(Material&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -93,8 +90,7 @@ class Material : public ::Material {
     /**
      * Set texture for a material map type (MAP_DIFFUSE, MAP_SPECULAR...)
      */
-    inline auto SetTexture(int mapType, const ::Texture2D& texture) -> Material&
-    {
+    inline Material& SetTexture(int mapType, const ::Texture2D& texture) {
         ::SetMaterialTexture(this, mapType, texture);
         return *this;
     }
@@ -116,8 +112,7 @@ class Material : public ::Material {
     /**
      * Check if material is ready
      */
-    inline auto IsReady() -> bool
-    {
+    inline bool IsReady() {
         return ::IsMaterialReady(*this);
     }
 

@@ -12,42 +12,37 @@ class Touch {
     /**
      * Get touch position X for touch point 0 (relative to screen size)
      */
-     inline static auto GetX() -> int
-     {
-         return ::GetTouchX();
-     }
+    inline static int GetX() {
+        return ::GetTouchX();
+    }
 
     /**
      * Get touch position Y for touch point 0 (relative to screen size)
      */
-     inline static auto GetY() -> int
-     {
-         return ::GetTouchY();
-     }
+    inline static int GetY() {
+        return ::GetTouchY();
+    }
 
     /**
      * Get touch position XY for a touch point index (relative to screen size)
      */
-     inline static auto GetPosition(int index) -> Vector2
-     {
-         return ::GetTouchPosition(index);
-     }
+    inline static Vector2 GetPosition(int index) {
+        return ::GetTouchPosition(index);
+    }
 
     /**
      * Get touch point identifier for given index
      */
-     inline static auto GetPointId(int index) -> int
-     {
-         return ::GetTouchPointId(index);
-     }
+    inline static int GetPointId(int index) {
+        return ::GetTouchPointId(index);
+    }
 
     /**
      * Get number of touch points
      */
-     inline static auto GetPointCount() -> int
-     {
-         return ::GetTouchPointCount();
-     }
+    inline static int GetPointCount() {
+        return ::GetTouchPointCount();
+    }
 };
 }  // namespace raylib
 

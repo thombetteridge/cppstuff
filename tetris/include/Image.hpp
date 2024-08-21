@@ -106,81 +106,71 @@ class Image : public ::Image {
         other.format = 0;
     }
 
-    static auto Text(const std::string& text, int fontSize,
-        ::Color color = { 255, 255, 255, 255 }) -> ::Image
-    {
+    static ::Image Text(const std::string& text, int fontSize,
+            ::Color color = {255, 255, 255, 255}) {
         return ::ImageText(text.c_str(), fontSize, color);
     }
 
-    static auto Text(const ::Font& font, const std::string& text, float fontSize, float spacing,
-        ::Color tint = { 255, 255, 255, 255 }) -> ::Image
-    {
+    static ::Image Text(const ::Font& font, const std::string& text, float fontSize, float spacing,
+            ::Color tint = {255, 255, 255, 255}) {
         return ::ImageTextEx(font, text.c_str(), fontSize, spacing, tint);
     }
 
     /**
      * Get pixel data from screen buffer and return an Image (screenshot)
      */
-    static auto LoadFromScreen() -> ::Image
-    {
+    static ::Image LoadFromScreen() {
         return ::LoadImageFromScreen();
     }
 
     /**
      * Generate image: plain color
      */
-    static auto Color(int width, int height, ::Color color = { 255, 255, 255, 255 }) -> ::Image
-    {
+    static ::Image Color(int width, int height, ::Color color = {255, 255, 255, 255}) {
         return ::GenImageColor(width, height, color);
     }
 
     /**
      * Generate image: vertical gradient
      */
-    static auto GradientV(int width, int height, ::Color top, ::Color bottom) -> ::Image
-    {
+    static ::Image GradientV(int width, int height, ::Color top, ::Color bottom) {
         return ::GenImageGradientV(width, height, top, bottom);
     }
 
     /**
      * Generate image: horizontal gradient
      */
-    static auto GradientH(int width, int height, ::Color left, ::Color right) -> ::Image
-    {
+    static ::Image GradientH(int width, int height, ::Color left, ::Color right) {
         return ::GenImageGradientH(width, height, left, right);
     }
 
     /**
      * Generate image: radial gradient
      */
-    static auto GradientRadial(int width, int height, float density,
-        ::Color inner, ::Color outer) -> ::Image
-    {
+    static ::Image GradientRadial(int width, int height, float density,
+            ::Color inner, ::Color outer) {
         return ::GenImageGradientRadial(width, height, density, inner, outer);
     }
 
     /**
      * Generate image: checked
      */
-    static auto Checked(int width, int height, int checksX, int checksY,
-        ::Color col1 = { 255, 255, 255, 255 }, ::Color col2 = { 0, 0, 0, 255 }) -> ::Image
-    {
+    static ::Image Checked(int width, int height, int checksX, int checksY,
+            ::Color col1 = {255, 255, 255, 255}, ::Color col2 = {0, 0, 0, 255}) {
         return ::GenImageChecked(width, height, checksX, checksY, col1, col2);
     }
 
     /**
      * Generate image: white noise
      */
-    static auto WhiteNoise(int width, int height, float factor) -> ::Image
-    {
+    static ::Image WhiteNoise(int width, int height, float factor) {
         return ::GenImageWhiteNoise(width, height, factor);
     }
 
     /**
      * Generate image: cellular algorithm. Bigger tileSize means bigger cells
      */
-    static auto Cellular(int width, int height, int tileSize) -> ::Image
-    {
+    static ::Image Cellular(int width, int height, int tileSize) {
         return ::GenImageCellular(width, height, tileSize);
     }
 
@@ -188,14 +178,12 @@ class Image : public ::Image {
         Unload();
     }
 
-    auto operator=(const ::Image& image) -> Image&
-    {
+    Image& operator=(const ::Image& image) {
         set(image);
         return *this;
     }
 
-    auto operator=(const Image& other) -> Image&
-    {
+    Image& operator=(const Image& other) {
         if (this == &other) {
             return *this;
         }
@@ -206,8 +194,7 @@ class Image : public ::Image {
         return *this;
     }
 
-    auto operator=(Image&& other) noexcept -> Image&
-    {
+    Image& operator=(Image&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -338,32 +325,28 @@ class Image : public ::Image {
     /**
      * Retrieve the width and height of the image.
      */
-    inline auto GetSize() const -> ::Vector2
-    {
+    inline ::Vector2 GetSize() const {
         return {static_cast<float>(width), static_cast<float>(height)};
     }
 
     /**
      * Create an image duplicate (useful for transformations)
      */
-    inline auto Copy() const -> ::Image
-    {
+    inline ::Image Copy() const {
         return ::ImageCopy(*this);
     }
 
     /**
      * Create an image from another image piece
      */
-    inline auto FromImage(::Rectangle rec) const -> ::Image
-    {
+    inline ::Image FromImage(::Rectangle rec) const {
         return ::ImageFromImage(*this, rec);
     }
 
     /**
      * Convert image data to desired format
      */
-    inline auto Format(int newFormat) -> Image&
-    {
+    inline Image& Format(int newFormat) {
         ::ImageFormat(this, newFormat);
         return *this;
     }
@@ -371,8 +354,7 @@ class Image : public ::Image {
     /**
      * Convert image to POT (power-of-two)
      */
-    inline auto ToPOT(::Color fillColor) -> Image&
-    {
+    inline Image& ToPOT(::Color fillColor) {
         ::ImageToPOT(this, fillColor);
         return *this;
     }
@@ -380,8 +362,7 @@ class Image : public ::Image {
     /**
      * Crop an image to area defined by a rectangle
      */
-    inline auto Crop(::Rectangle crop) -> Image&
-    {
+    inline Image& Crop(::Rectangle crop) {
         ::ImageCrop(this, crop);
         return *this;
     }
@@ -389,8 +370,7 @@ class Image : public ::Image {
     /**
      * Crop image depending on alpha value
      */
-    inline auto AlphaCrop(float threshold) -> Image&
-    {
+    inline Image& AlphaCrop(float threshold) {
         ::ImageAlphaCrop(this, threshold);
         return *this;
     }
@@ -398,8 +378,7 @@ class Image : public ::Image {
     /**
      * Clear alpha channel to desired color
      */
-    inline auto AlphaClear(::Color color, float threshold) -> Image&
-    {
+    inline Image& AlphaClear(::Color color, float threshold) {
         ::ImageAlphaClear(this, color, threshold);
         return *this;
     }
@@ -407,8 +386,7 @@ class Image : public ::Image {
     /**
      * Apply alpha mask to image
      */
-    inline auto AlphaMask(const ::Image& alphaMask) -> Image&
-    {
+    inline Image& AlphaMask(const ::Image& alphaMask) {
         ::ImageAlphaMask(this, alphaMask);
         return *this;
     }
@@ -416,8 +394,7 @@ class Image : public ::Image {
     /**
      * Premultiply alpha channel
      */
-    inline auto AlphaPremultiply() -> Image&
-    {
+    inline Image& AlphaPremultiply() {
         ::ImageAlphaPremultiply(this);
         return *this;
     }
@@ -425,24 +402,21 @@ class Image : public ::Image {
     /**
      * Crop an image to a new given width and height.
      */
-    inline auto Crop(int newWidth, int newHeight) -> Image&
-    {
+    inline Image& Crop(int newWidth, int newHeight) {
         return Crop(0, 0, newWidth, newHeight);
     }
 
     /**
      * Crop an image to a new given width and height based on a vector.
      */
-    inline auto Crop(::Vector2 size) -> Image&
-    {
+    inline Image& Crop(::Vector2 size) {
         return Crop(0, 0, static_cast<int>(size.x), static_cast<int>(size.y));
     }
 
     /**
      * Crop an image to area defined by a rectangle
      */
-    inline auto Crop(int offsetX, int offsetY, int newWidth, int newHeight) -> Image&
-    {
+    inline Image& Crop(int offsetX, int offsetY, int newWidth, int newHeight) {
         ::Rectangle rect{
             static_cast<float>(offsetX),
             static_cast<float>(offsetY),
@@ -456,8 +430,7 @@ class Image : public ::Image {
     /**
      * Resize and image to new size
      */
-    inline auto Resize(int newWidth, int newHeight) -> Image&
-    {
+    inline Image& Resize(int newWidth, int newHeight) {
         ::ImageResize(this, newWidth, newHeight);
         return *this;
     }
@@ -465,8 +438,7 @@ class Image : public ::Image {
     /**
      * Resize and image to new size using Nearest-Neighbor scaling algorithm
      */
-    inline auto ResizeNN(int newWidth, int newHeight) -> Image&
-    {
+    inline Image& ResizeNN(int newWidth, int newHeight) {
         ::ImageResizeNN(this, newWidth, newHeight);
         return *this;
     }
@@ -474,9 +446,8 @@ class Image : public ::Image {
     /**
      * Resize canvas and fill with color
      */
-    inline auto ResizeCanvas(int newWidth, int newHeight, int offsetX = 0, int offsetY = 0,
-        ::Color color = { 255, 255, 255, 255 }) -> Image&
-    {
+    inline Image& ResizeCanvas(int newWidth, int newHeight, int offsetX = 0, int offsetY = 0,
+            ::Color color = {255, 255, 255, 255}) {
         ::ImageResizeCanvas(this, newWidth, newHeight, offsetX, offsetY, color);
         return *this;
     }
@@ -484,8 +455,7 @@ class Image : public ::Image {
     /**
      * Generate all mipmap levels for a provided image
      */
-    inline auto Mipmaps() -> Image&
-    {
+    inline Image& Mipmaps() {
         ::ImageMipmaps(this);
         return *this;
     }
@@ -493,8 +463,7 @@ class Image : public ::Image {
     /**
      * Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
      */
-    inline auto Dither(int rBpp, int gBpp, int bBpp, int aBpp) -> Image&
-    {
+    inline Image& Dither(int rBpp, int gBpp, int bBpp, int aBpp) {
         ::ImageDither(this, rBpp, gBpp, bBpp, aBpp);
         return *this;
     }
@@ -502,8 +471,7 @@ class Image : public ::Image {
     /**
      * Flip image vertically
      */
-    inline auto FlipVertical() -> Image&
-    {
+    inline Image& FlipVertical() {
         ::ImageFlipVertical(this);
         return *this;
     }
@@ -511,8 +479,7 @@ class Image : public ::Image {
     /**
      * Flip image horizontally
      */
-    inline auto FlipHorizontal() -> Image&
-    {
+    inline Image& FlipHorizontal() {
         ::ImageFlipHorizontal(this);
         return *this;
     }
@@ -520,8 +487,7 @@ class Image : public ::Image {
     /**
      * Rotate image clockwise 90deg
      */
-    inline auto RotateCW() -> Image&
-    {
+    inline Image& RotateCW() {
         ::ImageRotateCW(this);
         return *this;
     }
@@ -529,8 +495,7 @@ class Image : public ::Image {
     /**
      * Rotate image counter-clockwise 90deg
      */
-    inline auto RotateCCW() -> Image&
-    {
+    inline Image& RotateCCW() {
         ::ImageRotateCCW(this);
         return *this;
     }
@@ -538,8 +503,7 @@ class Image : public ::Image {
     /**
      * Modify image color: tint
      */
-    inline auto ColorTint(::Color color = { 255, 255, 255, 255 }) -> Image&
-    {
+    inline Image& ColorTint(::Color color = {255, 255, 255, 255}) {
         ::ImageColorTint(this, color);
         return *this;
     }
@@ -547,8 +511,7 @@ class Image : public ::Image {
     /**
      * Modify image color: invert
      */
-    inline auto ColorInvert() -> Image&
-    {
+    inline Image& ColorInvert() {
         ::ImageColorInvert(this);
         return *this;
     }
@@ -556,8 +519,7 @@ class Image : public ::Image {
     /**
      * Modify image color: grayscale
      */
-    inline auto ColorGrayscale() -> Image&
-    {
+    inline Image& ColorGrayscale() {
         ::ImageColorGrayscale(this);
         return *this;
     }
@@ -567,8 +529,7 @@ class Image : public ::Image {
      *
      * @param contrast Contrast values between -100 and 100
      */
-    inline auto ColorContrast(float contrast) -> Image&
-    {
+    inline Image& ColorContrast(float contrast) {
         ::ImageColorContrast(this, contrast);
         return *this;
     }
@@ -578,8 +539,7 @@ class Image : public ::Image {
      *
      * @param brightness Brightness values between -255 and 255
      */
-    inline auto ColorBrightness(int brightness) -> Image&
-    {
+    inline Image& ColorBrightness(int brightness) {
         ::ImageColorBrightness(this, brightness);
         return *this;
     }
@@ -587,8 +547,7 @@ class Image : public ::Image {
     /**
      * Modify image color: replace color
      */
-    inline auto ColorReplace(::Color color, ::Color replace) -> Image&
-    {
+    inline Image& ColorReplace(::Color color, ::Color replace) {
         ::ImageColorReplace(this, color, replace);
         return *this;
     }
@@ -598,32 +557,28 @@ class Image : public ::Image {
      *
      * @param threshold Threshold is defined as a percentatge: 0.0f -> 1.0f
      */
-    inline auto GetAlphaBorder(float threshold) const -> Rectangle
-    {
+    inline Rectangle GetAlphaBorder(float threshold) const {
         return ::GetImageAlphaBorder(*this, threshold);
     }
 
     /**
      * Get image pixel color at (x, y) position
      */
-    inline auto GetColor(int x = 0, int y = 0) const -> raylib::Color
-    {
+    inline raylib::Color GetColor(int x = 0, int y = 0) const {
         return ::GetImageColor(*this, x, y);
     }
 
     /**
      * Get image pixel color at vector position
      */
-    inline auto GetColor(::Vector2 position) const -> raylib::Color
-    {
+    inline raylib::Color GetColor(::Vector2 position) const {
         return ::GetImageColor(*this, static_cast<int>(position.x), static_cast<int>(position.y));
     }
 
     /**
      * Clear image background with given color
      */
-    inline auto ClearBackground(::Color color = { 0, 0, 0, 255 }) -> Image&
-    {
+    inline Image& ClearBackground(::Color color = {0, 0, 0, 255}) {
         ::ImageClearBackground(this, color);
         return *this;
     }
@@ -705,16 +660,14 @@ class Image : public ::Image {
     /**
      * Load color data from image as a Color array (RGBA - 32bit)
      */
-    inline auto LoadColors() const -> ::Color*
-    {
+    inline ::Color* LoadColors() const {
         return ::LoadImageColors(*this);
     }
 
     /**
      * Load colors palette from image as a Color array (RGBA - 32bit)
      */
-    inline auto LoadPalette(int maxPaletteSize, int* colorsCount) const -> ::Color*
-    {
+    inline ::Color* LoadPalette(int maxPaletteSize, int *colorsCount) const {
         return ::LoadImagePalette(*this, maxPaletteSize, colorsCount);
     }
 
@@ -735,8 +688,7 @@ class Image : public ::Image {
     /**
      * Load texture from image data.
      */
-    inline auto LoadTexture() const -> ::Texture2D
-    {
+    inline ::Texture2D LoadTexture() const {
         return ::LoadTextureFromImage(*this);
     }
 
@@ -752,8 +704,7 @@ class Image : public ::Image {
     /**
      * Get pixel data size in bytes for certain format
      */
-    static auto GetPixelDataSize(int width, int height, int format = PIXELFORMAT_UNCOMPRESSED_R32G32B32A32) -> int
-    {
+    static int GetPixelDataSize(int width, int height, int format = PIXELFORMAT_UNCOMPRESSED_R32G32B32A32) {
         return ::GetPixelDataSize(width, height, format);
     }
 
@@ -762,8 +713,7 @@ class Image : public ::Image {
      *
      * @return The pixel data size of the image.
      */
-    inline auto GetPixelDataSize() const -> int
-    {
+    inline int GetPixelDataSize() const {
         return ::GetPixelDataSize(width, height, format);
     }
 
@@ -772,8 +722,7 @@ class Image : public ::Image {
      *
      * @return True or false depending on whether the Image has been loaded.
      */
-    inline auto IsReady() const -> bool
-    {
+    inline bool IsReady() const {
         return ::IsImageReady(*this);
     }
 

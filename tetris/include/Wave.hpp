@@ -71,14 +71,12 @@ class Wave : public ::Wave {
     GETTERSETTER(unsigned int, Channels, channels)
     GETTERSETTER(void *, Data, data)
 
-    auto operator=(const ::Wave& wave) -> Wave&
-    {
+    Wave& operator=(const ::Wave& wave) {
         set(wave);
         return *this;
     }
 
-    auto operator=(const Wave& other) -> Wave&
-    {
+    Wave& operator=(const Wave& other) {
         if (this == &other) {
             return *this;
         }
@@ -89,8 +87,7 @@ class Wave : public ::Wave {
         return *this;
     }
 
-    auto operator=(Wave&& other) noexcept -> Wave&
-    {
+    Wave& operator=(Wave&& other) noexcept {
         if (this != &other) {
             return *this;
         }
@@ -110,16 +107,14 @@ class Wave : public ::Wave {
     /**
      * Copy a wave to a new wave
      */
-    inline auto Copy() const -> ::Wave
-    {
+    inline ::Wave Copy() const {
         return ::WaveCopy(*this);
     }
 
     /**
      * Crop a wave to defined samples range
      */
-    inline auto Crop(int initSample, int finalSample) -> Wave&
-    {
+    inline Wave& Crop(int initSample, int finalSample) {
         ::WaveCrop(this, initSample, finalSample);
         return *this;
     }
@@ -127,8 +122,7 @@ class Wave : public ::Wave {
     /**
      * Convert wave data to desired format
      */
-    inline auto Format(int SampleRate, int SampleSize, int Channels = 2) -> Wave&
-    {
+    inline Wave& Format(int SampleRate, int SampleSize, int Channels = 2) {
         ::WaveFormat(this, SampleRate, SampleSize, Channels);
         return *this;
     }
@@ -136,8 +130,7 @@ class Wave : public ::Wave {
     /**
      * Load samples data from wave as a floats array
      */
-    inline auto LoadSamples() -> float*
-    {
+    inline float* LoadSamples() {
         return ::LoadWaveSamples(*this);
     }
 
@@ -151,8 +144,7 @@ class Wave : public ::Wave {
     /**
      * Export wave data to file, returns true on success
      */
-    inline auto Export(const std::string& fileName) -> bool
-    {
+    inline bool Export(const std::string& fileName) {
         // TODO(RobLoach): Throw exception on error.
         return ::ExportWave(*this, fileName.c_str());
     }
@@ -160,8 +152,7 @@ class Wave : public ::Wave {
     /**
      * Export wave sample data to code (.h), returns true on success
      */
-    inline auto ExportAsCode(const std::string& fileName) -> bool
-    {
+    inline bool ExportAsCode(const std::string& fileName) {
         // TODO(RobLoach): Throw exception on error.
         return ::ExportWaveAsCode(*this, fileName.c_str());
     }
@@ -180,8 +171,7 @@ class Wave : public ::Wave {
     /**
      * Load sound from wave data
      */
-    inline auto LoadSound() -> ::Sound
-    {
+    inline ::Sound LoadSound() {
         return ::LoadSoundFromWave(*this);
     }
 
@@ -221,8 +211,7 @@ class Wave : public ::Wave {
      *
      * @return True or false depending on whether the wave data has been loaded.
      */
-    inline auto IsReady() const -> bool
-    {
+    inline bool IsReady() const {
         return ::IsWaveReady(*this);
     }
 

@@ -48,8 +48,7 @@ class RenderTexture : public ::RenderTexture {
     /**
      * Get the color buffer attachment texture.
      */
-    inline auto GetTexture() -> TextureUnmanaged
-    {
+    inline TextureUnmanaged GetTexture() {
         return texture;
     }
 
@@ -60,8 +59,7 @@ class RenderTexture : public ::RenderTexture {
     /**
      * Depth buffer attachment texture
      */
-    inline auto GetDepth() -> TextureUnmanaged
-    {
+    inline TextureUnmanaged GetDepth() {
         return depth;
     }
 
@@ -69,16 +67,14 @@ class RenderTexture : public ::RenderTexture {
         depth = newDepth;
     }
 
-    auto operator=(const ::RenderTexture& texture) -> RenderTexture&
-    {
+    RenderTexture& operator=(const ::RenderTexture& texture) {
         set(texture);
         return *this;
     }
 
-    auto operator=(const RenderTexture&) -> RenderTexture& = delete;
+    RenderTexture& operator=(const RenderTexture&) = delete;
 
-    auto operator=(RenderTexture&& other) noexcept -> RenderTexture&
-    {
+    RenderTexture& operator=(RenderTexture&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -104,8 +100,7 @@ class RenderTexture : public ::RenderTexture {
     /**
      * Initializes render texture for drawing
      */
-    inline auto BeginMode() -> RenderTexture&
-    {
+    inline RenderTexture& BeginMode() {
         ::BeginTextureMode(*this);
         return *this;
     }
@@ -113,8 +108,7 @@ class RenderTexture : public ::RenderTexture {
     /**
      * Ends drawing to render texture
      */
-    inline auto EndMode() -> RenderTexture&
-    {
+    inline RenderTexture& EndMode() {
         ::EndTextureMode();
         return *this;
     }
@@ -122,16 +116,14 @@ class RenderTexture : public ::RenderTexture {
     /**
      * Load texture for rendering (framebuffer)
      */
-    static auto Load(int width, int height) -> RenderTexture
-    {
+    static RenderTexture Load(int width, int height) {
         return ::LoadRenderTexture(width, height);
     }
 
     /**
      * Retrieves whether or not the render texture is ready.
      */
-    inline auto IsReady() const -> bool
-    {
+    inline bool IsReady() const {
         return ::IsRenderTextureReady(*this);
     }
 

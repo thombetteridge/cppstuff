@@ -19,14 +19,12 @@ class Gamepad {
 
     GETTERSETTER(int, Number, number)
 
-    auto operator=(const Gamepad& gamepad) -> Gamepad&
-    {
+    Gamepad& operator=(const Gamepad& gamepad) {
         set(gamepad);
         return *this;
     }
 
-    auto operator=(int gamepadNumber) -> Gamepad&
-    {
+    Gamepad& operator=(int gamepadNumber) {
         set(gamepadNumber);
         return *this;
     }
@@ -36,24 +34,21 @@ class Gamepad {
     /**
      * Detect if a gamepad is available
      */
-    inline auto IsAvailable() const -> bool
-    {
+    inline bool IsAvailable() const {
         return ::IsGamepadAvailable(number);
     }
 
     /**
      * Detect if a gamepad is available
      */
-    static inline auto IsAvailable(int number) -> bool
-    {
+    static inline bool IsAvailable(int number) {
         return ::IsGamepadAvailable(number);
     }
 
     /**
      * Return gamepad internal name id
      */
-    auto GetName() const -> std::string
-    {
+    std::string GetName() const {
         return ::GetGamepadName(number);
     }
 
@@ -67,61 +62,53 @@ class Gamepad {
     /**
      * Detect if a gamepad button has been pressed once
      */
-    inline auto IsButtonPressed(int button) const -> bool
-    {
+    inline bool IsButtonPressed(int button) const {
         return ::IsGamepadButtonPressed(number, button);
     }
 
     /**
      * Detect if a gamepad button is being pressed
      */
-    inline auto IsButtonDown(int button) const -> bool
-    {
+    inline bool IsButtonDown(int button) const {
         return ::IsGamepadButtonDown(number, button);
     }
 
     /**
      * Detect if a gamepad button has been released once
      */
-    inline auto IsButtonReleased(int button) const -> bool
-    {
+    inline bool IsButtonReleased(int button) const {
         return ::IsGamepadButtonReleased(number, button);
     }
 
     /**
      * Detect if a gamepad button is NOT being pressed
      */
-    inline auto IsButtonUp(int button) const -> bool
-    {
+    inline bool IsButtonUp(int button) const {
         return ::IsGamepadButtonUp(number, button);
     }
 
     /**
      * Get the last gamepad button pressed
      */
-    inline auto GetButtonPressed() const -> int
-    {
+    inline int GetButtonPressed() const {
         return ::GetGamepadButtonPressed();
     }
 
     /**
      * Return gamepad axis count for a gamepad
      */
-    inline auto GetAxisCount() const -> int
-    {
+    inline int GetAxisCount() const {
         return ::GetGamepadAxisCount(number);
     }
 
     /**
      * Return axis movement value for a gamepad axis
      */
-    inline auto GetAxisMovement(int axis) const -> float
-    {
+    inline float GetAxisMovement(int axis) const {
         return ::GetGamepadAxisMovement(number, axis);
     }
 
-    inline auto SetMappings(const std::string& mappings) -> int
-    {
+    inline int SetMappings(const std::string& mappings) {
         return SetGamepadMappings(mappings.c_str());
     }
 

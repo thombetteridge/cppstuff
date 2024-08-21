@@ -66,16 +66,14 @@ class Music : public ::Music {
     GETTERSETTER(int, CtxType, ctxType)
     GETTERSETTER(void*, CtxData, ctxData)
 
-    auto operator=(const ::Music& music) -> Music&
-    {
+    Music& operator=(const ::Music& music) {
         set(music);
         return *this;
     }
 
-    auto operator=(const Music&) -> Music& = delete;
+    Music& operator=(const Music&) = delete;
 
-    auto operator=(Music&& other) noexcept -> Music&
-    {
+    Music& operator=(Music&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -102,8 +100,7 @@ class Music : public ::Music {
     /**
      * Start music playing
      */
-    inline auto Play() -> Music&
-    {
+    inline Music& Play() {
         ::PlayMusicStream(*this);
         return *this;
     }
@@ -111,8 +108,7 @@ class Music : public ::Music {
     /**
      * Updates buffers for music streaming
      */
-    inline auto Update() -> Music&
-    {
+    inline Music& Update() {
         ::UpdateMusicStream(*this);
         return *this;
     }
@@ -120,8 +116,7 @@ class Music : public ::Music {
     /**
      * Stop music playing
      */
-    inline auto Stop() -> Music&
-    {
+    inline Music& Stop() {
         ::StopMusicStream(*this);
         return *this;
     }
@@ -129,8 +124,7 @@ class Music : public ::Music {
     /**
      * Pause music playing
      */
-    inline auto Pause() -> Music&
-    {
+    inline Music& Pause() {
         ::PauseMusicStream(*this);
         return *this;
     }
@@ -138,8 +132,7 @@ class Music : public ::Music {
     /**
      * Resume music playing
      */
-    inline auto Resume() -> Music&
-    {
+    inline Music& Resume() {
         ::ResumeMusicStream(*this);
         return *this;
     }
@@ -147,8 +140,7 @@ class Music : public ::Music {
     /**
      * Seek music to a position (in seconds)
      */
-    inline auto Seek(float position) -> Music&
-    {
+    inline Music& Seek(float position) {
         SeekMusicStream(*this, position);
         return *this;
     }
@@ -156,16 +148,14 @@ class Music : public ::Music {
     /**
      * Check if music is playing
      */
-    inline auto IsPlaying() const -> bool
-    {
+    inline bool IsPlaying() const {
         return ::IsMusicStreamPlaying(*this);
     }
 
     /**
      * Set volume for music
      */
-    inline auto SetVolume(float volume) -> Music&
-    {
+    inline Music& SetVolume(float volume) {
         ::SetMusicVolume(*this, volume);
         return *this;
     }
@@ -173,8 +163,7 @@ class Music : public ::Music {
     /**
      * Set pitch for music
      */
-    inline auto SetPitch(float pitch) -> Music&
-    {
+    inline Music& SetPitch(float pitch) {
         ::SetMusicPitch(*this, pitch);
         return *this;
     }
@@ -182,8 +171,7 @@ class Music : public ::Music {
     /**
      * Set pan for a music (0.5 is center)
      */
-    inline auto SetPan(float pan = 0.5f) -> Music&
-    {
+    inline Music& SetPan(float pan = 0.5f) {
         ::SetMusicPan(*this, pan);
         return *this;
     }
@@ -191,16 +179,14 @@ class Music : public ::Music {
     /**
      * Get music time length (in seconds)
      */
-    inline auto GetTimeLength() const -> float
-    {
+    inline float GetTimeLength() const {
         return ::GetMusicTimeLength(*this);
     }
 
     /**
      * Get current music time played (in seconds)
      */
-    inline auto GetTimePlayed() const -> float
-    {
+    inline float GetTimePlayed() const {
         return ::GetMusicTimePlayed(*this);
     }
 
@@ -233,8 +219,7 @@ class Music : public ::Music {
      *
      * @return True or false depending on whether the Music has been loaded.
      */
-    inline auto IsReady() const -> bool
-    {
+    inline bool IsReady() const {
         return ::IsMusicReady(*this);
     }
 

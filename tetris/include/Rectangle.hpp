@@ -29,14 +29,12 @@ class Rectangle : public ::Rectangle {
     GETTERSETTER(float, Width, width)
     GETTERSETTER(float, Height, height)
 
-    auto operator=(const ::Rectangle& rect) -> Rectangle&
-    {
+    Rectangle& operator=(const ::Rectangle& rect) {
         set(rect);
         return *this;
     }
 
-    inline auto ToVector4() -> ::Vector4
-    {
+    inline ::Vector4 ToVector4() {
         return {x, y, width, height};
     }
 
@@ -90,72 +88,61 @@ class Rectangle : public ::Rectangle {
     /**
      * Check collision between two rectangles
      */
-    inline auto CheckCollision(::Rectangle rec2) const -> bool
-    {
+    inline bool CheckCollision(::Rectangle rec2) const {
         return ::CheckCollisionRecs(*this, rec2);
     }
 
     /**
      * Get collision rectangle for two rectangles collision
      */
-    inline auto GetCollision(::Rectangle rec2) const -> ::Rectangle
-    {
+    inline ::Rectangle GetCollision(::Rectangle rec2) const {
         return ::GetCollisionRec(*this, rec2);
     }
 
     /**
      * Check if point is inside rectangle
      */
-    inline auto CheckCollision(::Vector2 point) const -> bool
-    {
+    inline bool CheckCollision(::Vector2 point) const {
         return ::CheckCollisionPointRec(point, *this);
     }
 
     /**
      * Check collision between circle and rectangle
      */
-    inline auto CheckCollision(::Vector2 center, float radius) -> bool
-    {
+    inline bool CheckCollision(::Vector2 center, float radius) {
         return ::CheckCollisionCircleRec(center, radius, *this);
     }
 
-    inline auto GetSize() -> Vector2
-    {
+    inline Vector2 GetSize() {
         return {width, height};
     }
 
-    inline auto SetSize(float newWidth, float newHeight) -> Rectangle&
-    {
+    inline Rectangle& SetSize(float newWidth, float newHeight) {
         width = newWidth;
         height = newHeight;
         return *this;
     }
 
-    inline auto SetSize(const ::Vector2& size) -> Rectangle&
-    {
+    inline Rectangle& SetSize(const ::Vector2& size) {
         return SetSize(size.x, size.y);
     }
 
-    inline auto SetShapesTexture(const ::Texture2D& texture) -> Rectangle&
-    {
+    inline Rectangle& SetShapesTexture(const ::Texture2D& texture) {
         ::SetShapesTexture(texture, *this);
         return *this;
     }
 
-    inline auto GetPosition() -> Vector2
-    {
+    inline Vector2 GetPosition() {
         return {x, y};
     }
 
-    inline auto SetPosition(float newX, float newY) -> Rectangle&
-    {
+    inline Rectangle& SetPosition(float newX, float newY) {
         x = newX;
         y = newY;
         return *this;
     }
 
-    inline auto SetPosition(const ::Vector2& position) -> Rectangle&
-    {
+    inline Rectangle& SetPosition(const ::Vector2& position) {
         return SetPosition(position.x, position.y);
     }
 

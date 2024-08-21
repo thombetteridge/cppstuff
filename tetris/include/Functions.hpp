@@ -35,8 +35,7 @@ RLCPPAPI inline void SetWindowTitle(const std::string& title) {
 /**
  * Get the human-readable, UTF-8 encoded name of the primary monitor
  */
-RLCPPAPI inline auto GetMonitorName(int monitor = 0) -> std::string
-{
+RLCPPAPI inline std::string GetMonitorName(int monitor = 0) {
     return ::GetMonitorName(monitor);
 }
 
@@ -50,8 +49,7 @@ RLCPPAPI inline void SetClipboardText(const std::string& text) {
 /**
  * Get clipboard text content
  */
-RLCPPAPI inline auto GetClipboardText() -> std::string
-{
+RLCPPAPI inline std::string GetClipboardText() {
     return ::GetClipboardText();
 }
 
@@ -65,16 +63,14 @@ RLCPPAPI inline void TakeScreenshot(const std::string& fileName) {
 /**
  * Get gamepad internal name id
  */
-RLCPPAPI inline auto GetGamepadName(int gamepad) -> std::string
-{
+RLCPPAPI inline std::string GetGamepadName(int gamepad) {
     return ::GetGamepadName(gamepad);
 }
 
 /**
  * Load text data from file (read)
  */
-RLCPPAPI auto LoadFileText(const std::string& fileName) -> std::string
-{
+RLCPPAPI std::string LoadFileText(const std::string& fileName) {
     char* text = ::LoadFileText(fileName.c_str());
     std::string output(text);
     ::UnloadFileText(text);
@@ -84,88 +80,77 @@ RLCPPAPI auto LoadFileText(const std::string& fileName) -> std::string
 /**
  * Save text data to file (write)
  */
-RLCPPAPI inline auto SaveFileText(const std::string& fileName, const std::string& text) -> bool
-{
+RLCPPAPI inline bool SaveFileText(const std::string& fileName, const std::string& text) {
     return ::SaveFileText(fileName.c_str(), const_cast<char*>(text.c_str()));
 }
 
 /**
  * Check if file exists
  */
-RLCPPAPI inline auto FileExists(const std::string& fileName) -> bool
-{
+RLCPPAPI inline bool FileExists(const std::string& fileName) {
     return ::FileExists(fileName.c_str());
 }
 
 /**
  * Check if directory path exists
  */
-RLCPPAPI inline auto DirectoryExists(const std::string& dirPath) -> bool
-{
+RLCPPAPI inline bool DirectoryExists(const std::string& dirPath) {
     return ::DirectoryExists(dirPath.c_str());
 }
 
 /**
  * Check file extension (including point: .png, .wav)
  */
-RLCPPAPI inline auto IsFileExtension(const std::string& fileName, const std::string& ext) -> bool
-{
+RLCPPAPI inline bool IsFileExtension(const std::string& fileName, const std::string& ext) {
     return ::IsFileExtension(fileName.c_str(), ext.c_str());
 }
 
 /**
  * Get pointer to extension for a filename string (including point: ".png")
  */
-RLCPPAPI inline auto GetFileExtension(const std::string& fileName) -> std::string
-{
+RLCPPAPI inline std::string GetFileExtension(const std::string& fileName) {
     return ::GetFileExtension(fileName.c_str());
 }
 
 /**
  * Get pointer to filename for a path string
  */
-RLCPPAPI inline auto GetFileName(const std::string& filePath) -> std::string
-{
+RLCPPAPI inline std::string GetFileName(const std::string& filePath) {
     return ::GetFileName(filePath.c_str());
 }
 
 /**
  * Get filename string without extension
  */
-RLCPPAPI inline auto GetFileNameWithoutExt(const std::string& filePath) -> std::string
-{
+RLCPPAPI inline std::string GetFileNameWithoutExt(const std::string& filePath) {
     return ::GetFileNameWithoutExt(filePath.c_str());
 }
 
 /**
  * Get full path for a given fileName with path
  */
-RLCPPAPI inline auto GetDirectoryPath(const std::string& filePath) -> std::string
-{
+RLCPPAPI inline std::string GetDirectoryPath(const std::string& filePath) {
     return ::GetDirectoryPath(filePath.c_str());
 }
 
 /**
  * Get previous directory path for a given path
  */
-RLCPPAPI inline auto GetPrevDirectoryPath(const std::string& dirPath) -> std::string
-{
+RLCPPAPI inline std::string GetPrevDirectoryPath(const std::string& dirPath) {
     return ::GetPrevDirectoryPath(dirPath.c_str());
 }
 
 /**
  * Get current working directory
  */
-RLCPPAPI inline auto GetWorkingDirectory() -> std::string
-{
+RLCPPAPI inline std::string GetWorkingDirectory() {
     return ::GetWorkingDirectory();
 }
 
 /**
  * Get filenames in a directory path
  */
-RLCPPAPI auto LoadDirectoryFiles(const std::string& dirPath) -> std::vector<std::string>
-{
+RLCPPAPI std::vector<std::string> LoadDirectoryFiles(const std::string& dirPath) {
     FilePathList files = ::LoadDirectoryFiles(dirPath.c_str());
     std::vector<std::string> output(files.paths, files.paths + files.count);
     ::UnloadDirectoryFiles(files);
@@ -175,16 +160,14 @@ RLCPPAPI auto LoadDirectoryFiles(const std::string& dirPath) -> std::vector<std:
 /**
  * Change working directory, return true on success
  */
-RLCPPAPI inline auto ChangeDirectory(const std::string& dir) -> bool
-{
+RLCPPAPI inline bool ChangeDirectory(const std::string& dir) {
     return ::ChangeDirectory(dir.c_str());
 }
 
 /**
  * Get dropped files names
  */
-RLCPPAPI auto LoadDroppedFiles() -> std::vector<std::string>
-{
+RLCPPAPI std::vector<std::string> LoadDroppedFiles() {
     if (!::IsFileDropped()) {
         return std::vector<std::string>();
     }
@@ -211,52 +194,46 @@ RLCPPAPI inline void OpenURL(const std::string& url) {
 /**
  * Load an image.
  */
-RLCPPAPI inline auto LoadImage(const std::string& fileName) -> ::Image
-{
+RLCPPAPI inline ::Image LoadImage(const std::string& fileName) {
     return ::LoadImage(fileName.c_str());
 }
 
 /**
  * Load an image from RAW file data
  */
-RLCPPAPI inline auto LoadImageRaw(const std::string& fileName,
-    int width, int height,
-    int format, int headerSize) -> ::Image
-{
+RLCPPAPI inline ::Image LoadImageRaw(const std::string& fileName,
+        int width, int height,
+        int format, int headerSize) {
     return ::LoadImageRaw(fileName.c_str(), width, height, format, headerSize);
 }
 
 /**
  * Load animated image data
  */
-RLCPPAPI inline auto LoadImageAnim(const std::string& fileName, int* frames) -> ::Image
-{
+RLCPPAPI inline ::Image LoadImageAnim(const std::string& fileName, int *frames) {
     return ::LoadImageAnim(fileName.c_str(), frames);
 }
 
 /**
  * Load image from memory buffer, fileType refers to extension like "png"
  */
-RLCPPAPI inline auto LoadImageFromMemory(const std::string& fileType,
-    const unsigned char* fileData,
-    int dataSize) -> ::Image
-{
+RLCPPAPI inline ::Image LoadImageFromMemory(const std::string& fileType,
+        const unsigned char *fileData,
+        int dataSize) {
     return ::LoadImageFromMemory(fileType.c_str(), fileData, dataSize);
 }
 
 /**
  * Export image data to file
  */
-RLCPPAPI inline auto ExportImage(const Image& image, const std::string& fileName) -> bool
-{
+RLCPPAPI inline bool ExportImage(const Image& image, const std::string& fileName) {
     return ::ExportImage(image, fileName.c_str());
 }
 
 /**
  * Export image as code file (.h) defining an array of bytes
  */
-RLCPPAPI inline auto ExportImageAsCode(const Image& image, const std::string& fileName) -> bool
-{
+RLCPPAPI inline bool ExportImageAsCode(const Image& image, const std::string& fileName) {
     return ::ExportImageAsCode(image, fileName.c_str());
 }
 
@@ -286,56 +263,49 @@ RLCPPAPI inline void DrawTextPro(const Font& font, const std::string& text, Vect
 /**
  * Load font from file (filename must include file extension)
  */
-RLCPPAPI inline auto LoadFont(const std::string& fileName) -> ::Font
-{
+RLCPPAPI inline ::Font LoadFont(const std::string& fileName) {
     return ::LoadFont(fileName.c_str());
 }
 
 /**
  * Load font from file (filename must include file extension)
  */
-RLCPPAPI inline auto LoadFontEx(const std::string& fileName, int fontSize, int* fontChars, int charsCount) -> ::Font
-{
+RLCPPAPI inline ::Font LoadFontEx(const std::string& fileName, int fontSize, int *fontChars, int charsCount) {
     return ::LoadFontEx(fileName.c_str(), fontSize, fontChars, charsCount);
 }
 
 /**
  * Measure string width for default font
  */
-RLCPPAPI inline auto MeasureText(const std::string& text, int fontSize) -> int
-{
+RLCPPAPI inline int MeasureText(const std::string& text, int fontSize) {
     return ::MeasureText(text.c_str(), fontSize);
 }
 
 /**
  * Check if two text string are equal
  */
-RLCPPAPI inline auto TextIsEqual(const std::string& text1, const std::string& text2) -> bool
-{
+RLCPPAPI inline bool TextIsEqual(const std::string& text1, const std::string& text2) {
     return ::TextIsEqual(text1.c_str(), text2.c_str());
 }
 
 /**
  * Check if two text string are equal
  */
-RLCPPAPI inline auto TextLength(const std::string& text) -> unsigned int
-{
+RLCPPAPI inline unsigned int TextLength(const std::string& text) {
     return ::TextLength(text.c_str());
 }
 
 /**
  * Get text length, checks for '\0' ending
  */
-RLAPI inline auto TextSubtext(const std::string& text, int position, int length) -> std::string
-{
+RLAPI inline std::string TextSubtext(const std::string& text, int position, int length) {
     return ::TextSubtext(text.c_str(), position, length);
 }
 
 /**
  * Replace text string
  */
-RLAPI inline auto TextReplace(const std::string& text, const std::string& replace, const std::string& by) -> std::string
-{
+RLAPI inline std::string TextReplace(const std::string& text, const std::string& replace, const std::string& by) {
     const char* input = text.c_str();
     char* output = ::TextReplace(const_cast<char*>(input), replace.c_str(), by.c_str());
     if (output != NULL) {
@@ -349,8 +319,7 @@ RLAPI inline auto TextReplace(const std::string& text, const std::string& replac
 /**
  * Insert text in a position
  */
-RLAPI inline auto TextInsert(const std::string& text, const std::string& insert, int position) -> std::string
-{
+RLAPI inline std::string TextInsert(const std::string& text, const std::string& insert, int position) {
     char* output = ::TextInsert(text.c_str(), insert.c_str(), position);
     if (output != NULL) {
         std::string stringOutput(output);
@@ -363,8 +332,7 @@ RLAPI inline auto TextInsert(const std::string& text, const std::string& insert,
 /**
  * Split text into multiple strings
  */
-RLAPI inline auto TextSplit(const std::string& text, char delimiter) -> std::vector<std::string>
-{
+RLAPI inline std::vector<std::string> TextSplit(const std::string& text, char delimiter) {
     int count;
     const char** split = ::TextSplit(text.c_str(), delimiter, &count);
     return std::vector<std::string>(split, split + count);
@@ -373,40 +341,35 @@ RLAPI inline auto TextSplit(const std::string& text, char delimiter) -> std::vec
 /**
  * Find first text occurrence within a string
  */
-RLAPI inline auto TextFindIndex(const std::string& text, const std::string& find) -> int
-{
+RLAPI inline int TextFindIndex(const std::string& text, const std::string& find) {
     return ::TextFindIndex(text.c_str(), find.c_str());
 }
 
 /**
  * Get upper case version of provided string
  */
-RLAPI inline auto TextToUpper(const std::string& text) -> std::string
-{
+RLAPI inline std::string TextToUpper(const std::string& text) {
     return ::TextToUpper(text.c_str());
 }
 
 /**
  * Get lower case version of provided string
  */
-RLAPI inline auto TextToLower(const std::string& text) -> std::string
-{
+RLAPI inline std::string TextToLower(const std::string& text) {
     return ::TextToLower(text.c_str());
 }
 
 /**
  * Get Pascal case notation version of provided string
  */
-RLAPI inline auto TextToPascal(const std::string& text) -> std::string
-{
+RLAPI inline std::string TextToPascal(const std::string& text) {
     return ::TextToPascal(text.c_str());
 }
 
 /**
  * Get integer value from text (negative values not supported)
  */
-RLAPI inline auto TextToInteger(const std::string& text) -> int
-{
+RLAPI inline int TextToInteger(const std::string& text) {
     return ::TextToInteger(text.c_str());
 }
 

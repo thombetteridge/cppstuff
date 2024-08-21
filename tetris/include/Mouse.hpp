@@ -13,41 +13,35 @@ class Mouse {
     /**
      * Detect if a mouse button has been pressed once
      */
-     static inline auto IsButtonPressed(int button) -> bool
-     {
-         return ::IsMouseButtonPressed(button);
-     }
+    static inline bool IsButtonPressed(int button) {
+        return ::IsMouseButtonPressed(button);
+    }
 
     /**
      * Detect if a mouse button is being pressed
      */
-     static inline auto IsButtonDown(int button) -> bool
-     {
-         return ::IsMouseButtonDown(button);
-     }
+    static inline bool IsButtonDown(int button) {
+        return ::IsMouseButtonDown(button);
+    }
 
     /**
      * Detect if a mouse button has been released once
      */
-     static inline auto IsButtonReleased(int button) -> bool
-     {
-         return ::IsMouseButtonReleased(button);
-     }
+    static inline bool IsButtonReleased(int button) {
+        return ::IsMouseButtonReleased(button);
+    }
 
-     static inline auto IsButtonUp(int button) -> bool
-     {
-         return ::IsMouseButtonUp(button);
-     }
+    static inline bool IsButtonUp(int button) {
+        return ::IsMouseButtonUp(button);
+    }
 
-     static inline auto GetX() -> int
-     {
-         return ::GetMouseX();
-     }
+    static inline int GetX() {
+        return ::GetMouseX();
+    }
 
-     static inline auto GetY() -> int
-     {
-         return ::GetMouseY();
-     }
+    static inline int GetY() {
+        return ::GetMouseY();
+    }
 
     static inline void SetX(int x) {
         ::SetMousePosition(x, GetY());
@@ -57,8 +51,7 @@ class Mouse {
         ::SetMousePosition(GetX(), y);
     }
 
-    static inline auto GetPosition() -> Vector2
-    {
+    static inline Vector2 GetPosition() {
         return ::GetMousePosition();
     }
 
@@ -73,8 +66,7 @@ class Mouse {
     /**
      * Get mouse delta between frames
      */
-    static inline auto GetDelta() -> Vector2
-    {
+    static inline Vector2 GetDelta() {
         return ::GetMouseDelta();
     }
 
@@ -97,8 +89,7 @@ class Mouse {
     /**
      * Get mouse wheel movement for X or Y, whichever is larger
      */
-    static inline auto GetWheelMove() -> float
-    {
+    static inline float GetWheelMove() {
         return ::GetMouseWheelMove();
     }
 
@@ -107,8 +98,7 @@ class Mouse {
      *
      * @see ::GetMouseWheelMoveV()
      */
-    static inline auto GetWheelMoveV() -> Vector2
-    {
+    static inline Vector2 GetWheelMoveV() {
         return GetMouseWheelMoveV();
     }
 
@@ -124,40 +114,35 @@ class Mouse {
     /**
      * Get touch position X for touch point 0 (relative to screen size)
      */
-    static inline auto GetTouchX() -> int
-    {
+    static inline int GetTouchX() {
         return ::GetTouchX();
     }
 
     /**
      * Get touch position Y for touch point 0 (relative to screen size)
      */
-    static inline auto GetTouchY() -> int
-    {
+    static inline int GetTouchY() {
         return ::GetTouchY();
     }
 
     /**
      * Get touch position XY for a touch point index (relative to screen size)
      */
-    static inline auto GetTouchPosition(int index) -> Vector2
-    {
+    static inline Vector2 GetTouchPosition(int index) {
         return ::GetTouchPosition(index);
     }
 
     /**
      * Get a ray trace from mouse position
      */
-    static inline auto GetRay(::Vector2 mousePosition, const ::Camera& camera) -> Ray
-    {
+    static inline Ray GetRay(::Vector2 mousePosition, const ::Camera& camera) {
         return ::GetMouseRay(mousePosition, camera);
     }
 
     /**
      * Get a ray trace from mouse position
      */
-    static inline auto GetRay(const ::Camera& camera) -> Ray
-    {
+    static inline Ray GetRay(const ::Camera& camera) {
         return ::GetMouseRay(::GetMousePosition(), camera);
     }
 };

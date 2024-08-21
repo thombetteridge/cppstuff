@@ -54,16 +54,14 @@ class AudioStream : public ::AudioStream {
     GETTERSETTER(unsigned int, SampleSize, sampleSize)
     GETTERSETTER(unsigned int, Channels, channels)
 
-    auto operator=(const ::AudioStream& stream) -> AudioStream&
-    {
+    AudioStream& operator=(const ::AudioStream& stream) {
         set(stream);
         return *this;
     }
 
-    auto operator=(const AudioStream&) -> AudioStream& = delete;
+    AudioStream& operator=(const AudioStream&) = delete;
 
-    auto operator=(AudioStream&& other) noexcept -> AudioStream&
-    {
+    AudioStream& operator=(AudioStream&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -83,8 +81,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Update audio stream buffers with data
      */
-    inline auto Update(const void* data, int samplesCount) -> AudioStream&
-    {
+    inline AudioStream& Update(const void *data, int samplesCount) {
         ::UpdateAudioStream(*this, data, samplesCount);
         return *this;
     }
@@ -99,16 +96,14 @@ class AudioStream : public ::AudioStream {
     /**
      * Check if any audio stream buffers requires refill
      */
-    inline auto IsProcessed() const -> bool
-    {
+    inline bool IsProcessed() const {
         return ::IsAudioStreamProcessed(*this);
     }
 
     /**
      * Play audio stream
      */
-    inline auto Play() -> AudioStream&
-    {
+    inline AudioStream& Play() {
         ::PlayAudioStream(*this);
         return *this;
     }
@@ -116,8 +111,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Pause audio stream
      */
-    inline auto Pause() -> AudioStream&
-    {
+    inline AudioStream& Pause() {
         ::PauseAudioStream(*this);
         return *this;
     }
@@ -125,8 +119,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Resume audio stream
      */
-    inline auto Resume() -> AudioStream&
-    {
+    inline AudioStream& Resume() {
         ::ResumeAudioStream(*this);
         return *this;
     }
@@ -134,16 +127,14 @@ class AudioStream : public ::AudioStream {
     /**
      * Check if audio stream is playing
      */
-    inline auto IsPlaying() const -> bool
-    {
+    inline bool IsPlaying() const {
         return ::IsAudioStreamPlaying(*this);
     }
 
     /**
      * Stop audio stream
      */
-    inline auto Stop() -> AudioStream&
-    {
+    inline AudioStream& Stop() {
         ::StopAudioStream(*this);
         return *this;
     }
@@ -151,8 +142,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Set volume for audio stream (1.0 is max level)
      */
-    inline auto SetVolume(float volume = 1.0f) -> AudioStream&
-    {
+    inline AudioStream& SetVolume(float volume = 1.0f) {
         ::SetAudioStreamVolume(*this, volume);
         return *this;
     }
@@ -160,8 +150,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Set pitch for audio stream (1.0 is base level)
      */
-    inline auto SetPitch(float pitch) -> AudioStream&
-    {
+    inline AudioStream& SetPitch(float pitch) {
         ::SetAudioStreamPitch(*this, pitch);
         return *this;
     }
@@ -169,8 +158,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Set pan for audio stream (0.5 is centered)
      */
-    inline auto SetPan(float pan = 0.5f) -> AudioStream&
-    {
+    inline AudioStream& SetPan(float pan = 0.5f) {
         ::SetAudioStreamPitch(*this, pan);
         return *this;
     }
@@ -206,8 +194,7 @@ class AudioStream : public ::AudioStream {
     /**
      * Retrieve whether or not the audio stream is ready.
      */
-    auto IsReady() -> bool
-    {
+    bool IsReady() {
         return ::IsAudioStreamReady(*this);
     }
 

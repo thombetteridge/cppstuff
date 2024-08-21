@@ -1,4 +1,3 @@
-
 #ifndef RAYLIB_CPP_INCLUDE_COLOR_HPP_
 #define RAYLIB_CPP_INCLUDE_COLOR_HPP_
 
@@ -37,7 +36,7 @@ class Color : public ::Color {
     /**
      * Returns a Color from HSV values
      */
-    {
+    static ::Color FromHSV(float hue, float saturation, float value) {
         return ::ColorFromHSV(hue, saturation, value);
     }
 
@@ -55,8 +54,7 @@ class Color : public ::Color {
     /**
      * Returns hexadecimal value for a Color
      */
-    auto ToInt() const -> int
-    {
+    int ToInt() const {
         return ::ColorToInt(*this);
     }
 
@@ -70,16 +68,14 @@ class Color : public ::Color {
     /**
      * Returns color with alpha applied, alpha goes from 0.0f to 1.0f
      */
-    auto Fade(float alpha) const -> Color
-    {
+    Color Fade(float alpha) const {
         return ::Fade(*this, alpha);
     }
 
     /**
      * Returns Color normalized as float [0..1]
      */
-    auto Normalize() const -> Vector4
-    {
+    Vector4 Normalize() const {
         return ::ColorNormalize(*this);
     }
 
@@ -93,8 +89,7 @@ class Color : public ::Color {
     /**
      * Returns HSV values for a Color
      */
-    auto ToHSV() const -> Vector3
-    {
+    Vector3 ToHSV() const {
         return ::ColorToHSV(*this);
     }
 
@@ -103,8 +98,7 @@ class Color : public ::Color {
     GETTERSETTER(unsigned char, B, b)
     GETTERSETTER(unsigned char, A, a)
 
-    auto operator=(const ::Color& color) -> Color&
-    {
+    Color& operator=(const ::Color& color) {
         set(color);
         return *this;
     }
@@ -112,8 +106,7 @@ class Color : public ::Color {
     /**
      * Set background color (framebuffer clear color)
      */
-    inline auto ClearBackground() -> Color&
-    {
+    inline Color& ClearBackground() {
         ::ClearBackground(*this);
         return *this;
     }
@@ -205,47 +198,44 @@ class Color : public ::Color {
     /**
      * Returns color with alpha applied, alpha goes from 0.0f to 1.0f
      */
-    auto Alpha(float alpha) const -> Color
-    {
+    Color Alpha(float alpha) const {
         return ::ColorAlpha(*this, alpha);
     }
 
     /**
      * Returns src alpha-blended into dst color with tint
      */
-    auto AlphaBlend(::Color dst, ::Color tint) const -> Color
-    {
+    Color AlphaBlend(::Color dst, ::Color tint) const {
         return ::ColorAlphaBlend(dst, *this, tint);
     }
 
-    inline static auto LightGray() -> Color { return LIGHTGRAY; }
-    inline static auto Gray() -> Color { return GRAY; }
-    inline static auto DarkGray() -> Color { return DARKGRAY; }
-    inline static auto Yellow() -> Color { return YELLOW; }
-    inline static auto Gold() -> Color { return GOLD; }
-    inline static auto Orange() -> Color { return ORANGE; }
-    inline static auto Pink() -> Color { return PINK; }
-    inline static auto Red() -> Color { return RED; }
-    inline static auto Maroon() -> Color { return MAROON; }
-    inline static auto Green() -> Color { return GREEN; }
-    inline static auto Lime() -> Color { return LIME; }
-    inline static auto DarkGreen() -> Color { return DARKGREEN; }
-    inline static auto SkyBlue() -> Color { return SKYBLUE; }
-    inline static auto Blue() -> Color { return BLUE; }
-    inline static auto DarkBlue() -> Color { return DARKBLUE; }
-    inline static auto Purple() -> Color { return PURPLE; }
-    inline static auto Violet() -> Color { return VIOLET; }
-    inline static auto DarkPurple() -> Color { return DARKPURPLE; }
-    inline static auto Beige() -> Color { return BEIGE; }
-    inline static auto Brown() -> Color { return BROWN; }
-    inline static auto DarkBrown() -> Color { return DARKBROWN; }
-    inline static auto White() -> Color { return WHITE; }
-    inline static auto Black() -> Color { return BLACK; }
-    inline static auto Blank() -> Color { return BLANK; }
-    inline static auto Magenta() -> Color { return MAGENTA; }
-    inline static auto RayWhite() -> Color { return RAYWHITE; }
+    inline static Color LightGray() { return LIGHTGRAY; }
+    inline static Color Gray() { return GRAY; }
+    inline static Color DarkGray() { return DARKGRAY; }
+    inline static Color Yellow() { return YELLOW; }
+    inline static Color Gold() { return GOLD; }
+    inline static Color Orange() { return ORANGE; }
+    inline static Color Pink() { return PINK; }
+    inline static Color Red() { return RED; }
+    inline static Color Maroon() { return MAROON; }
+    inline static Color Green() { return GREEN; }
+    inline static Color Lime() { return LIME; }
+    inline static Color DarkGreen() { return DARKGREEN; }
+    inline static Color SkyBlue() { return SKYBLUE; }
+    inline static Color Blue() { return BLUE; }
+    inline static Color DarkBlue() { return DARKBLUE; }
+    inline static Color Purple() { return PURPLE; }
+    inline static Color Violet() { return VIOLET; }
+    inline static Color DarkPurple() { return DARKPURPLE; }
+    inline static Color Beige() { return BEIGE; }
+    inline static Color Brown() { return BROWN; }
+    inline static Color DarkBrown() { return DARKBROWN; }
+    inline static Color White() { return WHITE; }
+    inline static Color Black() { return BLACK; }
+    inline static Color Blank() { return BLANK; }
+    inline static Color Magenta() { return MAGENTA; }
+    inline static Color RayWhite() { return RAYWHITE; }
 
-private:
  private:
     void set(const ::Color& color) {
         r = color.r;

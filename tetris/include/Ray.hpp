@@ -24,8 +24,7 @@ class Ray : public ::Ray {
         set(::GetMouseRay(mousePosition, camera));
     }
 
-    auto operator=(const ::Ray& ray) -> Ray&
-    {
+    Ray& operator=(const ::Ray& ray) {
         set(ray);
         return *this;
     }
@@ -43,56 +42,49 @@ class Ray : public ::Ray {
     /**
      * Get collision information between ray and sphere
      */
-    inline auto GetCollision(::Vector3 center, float radius) const -> RayCollision
-    {
+    inline RayCollision GetCollision(::Vector3 center, float radius) const {
         return ::GetRayCollisionSphere(*this, center, radius);
     }
 
     /**
      * Detect collision between ray and box
      */
-    inline auto GetCollision(const ::BoundingBox& box) const -> RayCollision
-    {
+    inline RayCollision GetCollision(const ::BoundingBox& box) const {
         return ::GetRayCollisionBox(*this, box);
     }
 
     /**
      * Get collision information between ray and mesh
      */
-    inline auto GetCollision(const ::Mesh& mesh, const ::Matrix& transform) const -> RayCollision
-    {
+    inline RayCollision GetCollision(const ::Mesh& mesh, const ::Matrix& transform) const {
         return ::GetRayCollisionMesh(*this, mesh, transform);
     }
 
     /**
      * Get collision info between ray and triangle
      */
-    inline auto GetCollision(::Vector3 p1, ::Vector3 p2, ::Vector3 p3) const -> RayCollision
-    {
+    inline RayCollision GetCollision(::Vector3 p1, ::Vector3 p2, ::Vector3 p3) const {
         return ::GetRayCollisionTriangle(*this, p1, p2, p3);
     }
 
     /**
      * Get collision info between ray and quad
      */
-    inline auto GetCollision(::Vector3 p1, ::Vector3 p2, ::Vector3 p3, ::Vector3 p4) const -> RayCollision
-    {
+    inline RayCollision GetCollision(::Vector3 p1, ::Vector3 p2, ::Vector3 p3, ::Vector3 p4) const {
         return ::GetRayCollisionQuad(*this, p1, p2, p3, p4);
     }
 
     /**
      * Get a ray trace from mouse position
      */
-    inline static auto GetMouse(::Vector2 mousePosition, const ::Camera& camera) -> Ray
-    {
+    inline static Ray GetMouse(::Vector2 mousePosition, const ::Camera& camera) {
         return ::GetMouseRay(mousePosition, camera);
     }
 
     /**
      * Get a ray trace from mouse position
      */
-    inline static auto GetMouse(const ::Camera& camera) -> Ray
-    {
+    inline static Ray GetMouse(const ::Camera& camera) {
         return ::GetMouseRay(::GetMousePosition(), camera);
     }
 

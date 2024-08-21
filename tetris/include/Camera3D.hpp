@@ -38,8 +38,7 @@ class Camera3D : public ::Camera3D {
     GETTERSETTER(float, Fovy, fovy)
     GETTERSETTER(int, Projection, projection)
 
-    auto operator=(const ::Camera3D& camera) -> Camera3D&
-    {
+    Camera3D& operator=(const ::Camera3D& camera) {
         set(camera);
         return *this;
     }
@@ -47,8 +46,7 @@ class Camera3D : public ::Camera3D {
     /**
      * Initializes 3D mode with custom camera (3D)
      */
-    auto BeginMode() -> Camera3D&
-    {
+    Camera3D& BeginMode() {
         ::BeginMode3D(*this);
         return *this;
     }
@@ -56,8 +54,7 @@ class Camera3D : public ::Camera3D {
     /**
      * Ends 3D mode and returns to default 2D orthographic mode
      */
-    auto EndMode() -> Camera3D&
-    {
+    Camera3D& EndMode() {
         ::EndMode3D();
         return *this;
     }
@@ -65,16 +62,14 @@ class Camera3D : public ::Camera3D {
     /**
      * Get camera transform matrix (view matrix)
      */
-    inline auto GetMatrix() const -> Matrix
-    {
+    inline Matrix GetMatrix() const {
         return ::GetCameraMatrix(*this);
     }
 
     /**
      * Update camera position for selected mode
      */
-    inline auto Update(int mode) -> Camera3D&
-    {
+    inline Camera3D& Update(int mode) {
         ::UpdateCamera(this, mode);
         return *this;
     }
@@ -82,8 +77,7 @@ class Camera3D : public ::Camera3D {
     /**
      * Update camera movement/rotation
      */
-    inline auto Update(::Vector3 movement, ::Vector3 rotation, float zoom = 1.0f) -> Camera3D&
-    {
+    inline Camera3D& Update(::Vector3 movement, ::Vector3 rotation, float zoom = 1.0f) {
         ::UpdateCameraPro(this, movement, rotation, zoom);
         return *this;
     }
@@ -91,16 +85,14 @@ class Camera3D : public ::Camera3D {
     /**
      * Returns a ray trace from mouse position
      */
-    inline auto GetMouseRay(::Vector2 mousePosition) const -> Ray
-    {
+    inline Ray GetMouseRay(::Vector2 mousePosition) const {
         return ::GetMouseRay(mousePosition, *this);
     }
 
     /**
      * Returns the screen space position for a 3d world space position
      */
-    inline auto GetWorldToScreen(::Vector3 position) const -> Vector2
-    {
+    inline Vector2 GetWorldToScreen(::Vector3 position) const {
         return ::GetWorldToScreen(position, *this);
     }
 

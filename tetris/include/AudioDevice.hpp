@@ -53,8 +53,7 @@ class AudioDevice {
     /**
      * Check if audio device has been initialized successfully.
      */
-    inline auto IsReady() const -> bool
-    {
+    inline bool IsReady() const {
         return ::IsAudioDeviceReady();
     }
 
@@ -63,8 +62,7 @@ class AudioDevice {
      *
      * @param volume The desired volume to set.
      */
-    inline auto SetVolume(float volume) -> AudioDevice&
-    {
+    inline AudioDevice& SetVolume(float volume) {
         ::SetMasterVolume(volume);
         return *this;
     }

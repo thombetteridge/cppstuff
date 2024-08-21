@@ -31,8 +31,7 @@ class VrStereoConfig : public ::VrStereoConfig  {
     /**
      * Begin stereo rendering
      */
-    inline auto BeginMode() -> VrStereoConfig&
-    {
+    inline VrStereoConfig& BeginMode() {
         ::BeginVrStereoMode(*this);
         return *this;
     }
@@ -40,8 +39,7 @@ class VrStereoConfig : public ::VrStereoConfig  {
     /**
      * End stereo rendering
      */
-    inline auto EndMode() -> VrStereoConfig&
-    {
+    inline VrStereoConfig& EndMode() {
         ::EndVrStereoMode();
         return *this;
     }

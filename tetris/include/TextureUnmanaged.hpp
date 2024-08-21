@@ -86,8 +86,7 @@ class TextureUnmanaged : public ::Texture {
     GETTERSETTER(int, Mipmaps, mipmaps)
     GETTERSETTER(int, Format, format)
 
-    auto operator=(const ::Texture& texture) -> TextureUnmanaged&
-    {
+    TextureUnmanaged& operator=(const ::Texture& texture) {
         set(texture);
         return *this;
     }
@@ -95,8 +94,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Retrieve the width and height of the texture.
      */
-    inline auto GetSize() const -> ::Vector2
-    {
+    inline ::Vector2 GetSize() const {
         return {static_cast<float>(width), static_cast<float>(height)};
     }
 
@@ -144,8 +142,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Update GPU texture with new data
      */
-    inline auto Update(const void* pixels) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& Update(const void *pixels) {
         ::UpdateTexture(*this, pixels);
         return *this;
     }
@@ -153,8 +150,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Update GPU texture rectangle with new data
      */
-    inline auto Update(::Rectangle rec, const void* pixels) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& Update(::Rectangle rec, const void *pixels) {
         UpdateTextureRec(*this, rec, pixels);
         return *this;
     }
@@ -162,8 +158,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Get pixel data from GPU texture and return an Image
      */
-    inline auto GetData() const -> ::Image
-    {
+    inline ::Image GetData() const {
         return ::LoadImageFromTexture(*this);
     }
 
@@ -177,8 +172,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Generate GPU mipmaps for a texture
      */
-    inline auto GenMipmaps() -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& GenMipmaps() {
         ::GenTextureMipmaps(this);
         return *this;
     }
@@ -186,8 +180,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Set texture scaling filter mode
      */
-    inline auto SetFilter(int filterMode) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& SetFilter(int filterMode) {
         ::SetTextureFilter(*this, filterMode);
         return *this;
     }
@@ -195,8 +188,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Set texture wrapping mode
      */
-    inline auto SetWrap(int wrapMode) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& SetWrap(int wrapMode) {
         ::SetTextureWrap(*this, wrapMode);
         return *this;
     }
@@ -296,14 +288,12 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Set texture for a material map type (MAP_DIFFUSE, MAP_SPECULAR...)
      */
-    inline auto SetMaterial(::Material* material, int mapType = MATERIAL_MAP_NORMAL) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& SetMaterial(::Material *material, int mapType = MATERIAL_MAP_NORMAL) {
         ::SetMaterialTexture(material, mapType, *this);
         return *this;
     }
 
-    inline auto SetMaterial(const ::Material& material, int mapType = MATERIAL_MAP_NORMAL) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& SetMaterial(const ::Material& material, int mapType = MATERIAL_MAP_NORMAL) {
         ::SetMaterialTexture((::Material*)(&material), mapType, *this);
         return *this;
     }
@@ -311,8 +301,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Set texture and rectangle to be used on shapes drawing.
      */
-    inline auto SetShapes(const ::Rectangle& source) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& SetShapes(const ::Rectangle& source) {
         ::SetShapesTexture(*this, source);
         return *this;
     }
@@ -320,8 +309,7 @@ class TextureUnmanaged : public ::Texture {
     /**
      * Set shader uniform value for texture (sampler2d)
      */
-    inline auto SetShaderValue(const ::Shader& shader, int locIndex) -> TextureUnmanaged&
-    {
+    inline TextureUnmanaged& SetShaderValue(const ::Shader& shader, int locIndex) {
         ::SetShaderValueTexture(shader, locIndex, *this);
         return *this;
     }
@@ -331,8 +319,7 @@ class TextureUnmanaged : public ::Texture {
      *
      * @return True or false depending on whether the Texture has data.
      */
-    auto IsReady() const -> bool
-    {
+    bool IsReady() const {
         return id != 0;
     }
 

@@ -117,8 +117,7 @@ class Font : public ::Font {
     /**
      * Get the texture atlas containing the glyphs.
      */
-    inline auto GetTexture() -> TextureUnmanaged
-    {
+    inline TextureUnmanaged GetTexture() {
         return texture;
     }
 
@@ -129,17 +128,15 @@ class Font : public ::Font {
         texture = newTexture;
     }
 
-    auto operator=(const ::Font& font) -> Font&
-    {
+    Font& operator=(const ::Font& font) {
         Unload();
         set(font);
         return *this;
     }
 
-    auto operator=(const Font&) -> Font& = delete;
+    Font& operator=(const Font&) = delete;
 
-    auto operator=(Font&& other) noexcept -> Font&
-    {
+    Font& operator=(Font&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -209,8 +206,7 @@ class Font : public ::Font {
     /**
      * Returns if the font is ready to be used.
      */
-    auto IsReady() -> bool
-    {
+    bool IsReady() {
         return ::IsFontReady(*this);
     }
 
@@ -272,25 +268,22 @@ class Font : public ::Font {
     /**
      * Measure string size for Font
      */
-    inline auto MeasureText(const std::string& text, float fontSize, float spacing) const -> Vector2
-    {
+    inline Vector2 MeasureText(const std::string& text, float fontSize, float spacing) const {
         return ::MeasureTextEx(*this, text.c_str(), fontSize, spacing);
     }
 
     /**
      * Get index position for a unicode character on font
      */
-    inline auto GetGlyphIndex(int character) const -> int
-    {
+    inline int GetGlyphIndex(int character) const {
         return ::GetGlyphIndex(*this, character);
     }
 
     /**
      * Create an image from text (custom sprite font)
      */
-    inline auto ImageText(const std::string& text, float fontSize,
-        float spacing, ::Color tint) const -> ::Image
-    {
+    inline ::Image ImageText(const std::string& text, float fontSize,
+            float spacing, ::Color tint) const {
         return ::ImageTextEx(*this, text.c_str(), fontSize, spacing, tint);
     }
 

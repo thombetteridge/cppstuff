@@ -53,20 +53,17 @@ class Matrix : public ::Matrix {
     GETTERSETTER(float, M14, m14)
     GETTERSETTER(float, M15, m15)
 
-    auto operator=(const ::Matrix& matrix) -> Matrix&
-    {
+    Matrix& operator=(const ::Matrix& matrix) {
         set(matrix);
         return *this;
     }
 
-    auto operator=(const Matrix& matrix) -> Matrix&
-    {
+    Matrix& operator=(const Matrix& matrix) {
         set(matrix);
         return *this;
     }
 
-    auto operator==(const ::Matrix& other) -> bool
-    {
+    bool operator==(const ::Matrix& other) {
         return m0 == other.m0
             && m1 == other.m1
             && m2 == other.m2
@@ -85,8 +82,7 @@ class Matrix : public ::Matrix {
             && m15 == other.m15;
     }
 
-    auto operator!=(const ::Matrix& other) -> bool
-    {
+    bool operator!=(const ::Matrix& other) {
         return !(*this == other);
     }
 
@@ -94,118 +90,96 @@ class Matrix : public ::Matrix {
     /**
      * Returns the trace of the matrix (sum of the values along the diagonal)
      */
-    inline auto Trace() const -> float
-    {
+    inline float Trace() const {
         return ::MatrixTrace(*this);
     }
 
     /**
      * Transposes provided matrix
      */
-    inline auto Transpose() const -> Matrix
-    {
+    inline Matrix Transpose() const {
         return ::MatrixTranspose(*this);
     }
 
-    inline auto Invert() const -> Matrix
-    {
+    inline Matrix Invert() const {
         return ::MatrixInvert(*this);
     }
 
-    static auto Identity() -> Matrix
-    {
+    static Matrix Identity() {
         return ::MatrixIdentity();
     }
 
-    auto Add(const ::Matrix& right) -> Matrix
-    {
+    Matrix Add(const ::Matrix& right) {
         return ::MatrixAdd(*this, right);
     }
 
-    auto operator+(const ::Matrix& matrix) -> Matrix
-    {
-        return ::MatrixAdd(*this, matrix);
+    Matrix operator+(const ::Matrix& matrix) {
+            return ::MatrixAdd(*this, matrix);
     }
 
-    auto Subtract(const ::Matrix& right) -> Matrix
-    {
+    Matrix Subtract(const ::Matrix& right) {
         return ::MatrixSubtract(*this, right);
     }
 
-    auto operator-(const ::Matrix& matrix) -> Matrix
-    {
+    Matrix operator-(const ::Matrix& matrix) {
         return ::MatrixSubtract(*this, matrix);
     }
 
-    static auto Translate(float x, float y, float z) -> Matrix
-    {
+    static Matrix Translate(float x, float y, float z) {
         return ::MatrixTranslate(x, y, z);
     }
 
-    static auto Rotate(Vector3 axis, float angle) -> Matrix
-    {
+    static Matrix Rotate(Vector3 axis, float angle) {
         return ::MatrixRotate(axis, angle);
     }
 
-    static auto RotateXYZ(Vector3 angle) -> Matrix
-    {
+    static Matrix RotateXYZ(Vector3 angle) {
         return ::MatrixRotateXYZ(angle);
     }
 
-    static auto RotateX(float angle) -> Matrix
-    {
+    static Matrix RotateX(float angle) {
         return ::MatrixRotateX(angle);
     }
 
-    static auto RotateY(float angle) -> Matrix
-    {
+    static Matrix RotateY(float angle) {
         return ::MatrixRotateY(angle);
     }
 
-    static auto RotateZ(float angle) -> Matrix
-    {
+    static Matrix RotateZ(float angle) {
         return ::MatrixRotateZ(angle);
     }
 
-    static auto Scale(float x, float y, float z) -> Matrix
-    {
+    static Matrix Scale(float x, float y, float z) {
         return ::MatrixScale(x, y, z);
     }
 
-    auto Multiply(const ::Matrix& right) const -> Matrix
-    {
+    Matrix Multiply(const ::Matrix& right) const {
         return ::MatrixMultiply(*this, right);
     }
 
-    auto operator*(const ::Matrix& matrix) -> Matrix
-    {
+    Matrix operator*(const ::Matrix& matrix) {
         return ::MatrixMultiply(*this, matrix);
     }
 
-    static auto Frustum(double left, double right, double bottom, double top,
-        double near, double far) -> Matrix
-    {
+    static Matrix Frustum(double left, double right, double bottom, double top,
+            double near, double far) {
         return ::MatrixFrustum(left, right, bottom, top, near, far);
     }
 
-    static auto Perspective(double fovy, double aspect, double near, double far) -> Matrix
-    {
+    static Matrix Perspective(double fovy, double aspect, double near, double far) {
         return ::MatrixPerspective(fovy, aspect, near, far);
     }
 
-    static auto Ortho(double left, double right, double bottom, double top,
-        double near, double far) -> Matrix
-    {
+    static Matrix Ortho(double left, double right, double bottom, double top,
+            double near, double far) {
         return ::MatrixOrtho(left, right, bottom, top, near, far);
     }
 
-    static auto LookAt(Vector3 eye, Vector3 target, Vector3 up) -> Matrix
-    {
+    static Matrix LookAt(Vector3 eye, Vector3 target, Vector3 up) {
         return ::MatrixLookAt(eye, target, up);
     }
 
-    inline auto ToFloatV() const -> float16
-    {
+    inline float16 ToFloatV() const {
         return ::MatrixToFloatV(*this);
     }
 
@@ -216,19 +190,16 @@ class Matrix : public ::Matrix {
     /**
      * Set shader uniform value (matrix 4x4)
      */
-    inline auto SetShaderValue(const ::Shader& shader, int uniformLoc) -> Matrix&
-    {
+    inline Matrix& SetShaderValue(const ::Shader& shader, int uniformLoc) {
         ::SetShaderValueMatrix(shader, uniformLoc, *this);
         return *this;
     }
 
-    inline static auto GetCamera(const ::Camera& camera) -> Matrix
-    {
+    inline static Matrix GetCamera(const ::Camera& camera) {
         return ::GetCameraMatrix(camera);
     }
 
-    inline static auto GetCamera(const ::Camera2D& camera) -> Matrix
-    {
+    inline static Matrix GetCamera(const ::Camera2D& camera) {
         return ::GetCameraMatrix2D(camera);
     }
 

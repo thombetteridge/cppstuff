@@ -19,7 +19,7 @@ namespace raylib {
 class Sound : public ::Sound {
  public:
     Sound(const Sound&) = delete;
-    auto operator=(const Sound&) -> Sound& = delete;
+    Sound& operator=(const Sound&) = delete;
 
     Sound() {
         stream = { nullptr, nullptr, 0, 0, 0 };
@@ -62,8 +62,7 @@ class Sound : public ::Sound {
     GETTERSETTER(unsigned int, FrameCount, frameCount)
     GETTERSETTER(::AudioStream, Stream, stream)
 
-    auto operator=(Sound&& other) noexcept -> Sound&
-    {
+    Sound& operator=(Sound&& other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -79,8 +78,7 @@ class Sound : public ::Sound {
     /**
      * Update sound buffer with new data
      */
-    inline auto Update(const void* data, int samplesCount) -> Sound&
-    {
+    inline Sound& Update(const void *data, int samplesCount) {
         ::UpdateSound(*this, data, samplesCount);
         return *this;
     }
@@ -88,8 +86,7 @@ class Sound : public ::Sound {
     /**
      * Update sound buffer with new data, assuming it's the same sample count.
      */
-    inline auto Update(const void* data) -> Sound&
-    {
+    inline Sound& Update(const void *data) {
         ::UpdateSound(*this, data, static_cast<int>(frameCount));
         return *this;
     }
@@ -108,8 +105,7 @@ class Sound : public ::Sound {
     /**
      * Play a sound
      */
-    inline auto Play() -> Sound&
-    {
+    inline Sound& Play() {
         ::PlaySound(*this);
         return *this;
     }
@@ -117,8 +113,7 @@ class Sound : public ::Sound {
     /**
      * Stop playing a sound
      */
-    inline auto Stop() -> Sound&
-    {
+    inline Sound& Stop() {
         ::StopSound(*this);
         return *this;
     }
@@ -126,8 +121,7 @@ class Sound : public ::Sound {
     /**
      * Pause a sound
      */
-    inline auto Pause() -> Sound&
-    {
+    inline Sound& Pause() {
         ::PauseSound(*this);
         return *this;
     }
@@ -135,8 +129,7 @@ class Sound : public ::Sound {
     /**
      * Resume a paused sound
      */
-    inline auto Resume() -> Sound&
-    {
+    inline Sound& Resume() {
         ::ResumeSound(*this);
         return *this;
     }
@@ -144,16 +137,14 @@ class Sound : public ::Sound {
     /**
      * Check if a sound is currently playing
      */
-    inline auto IsPlaying() const -> bool
-    {
+    inline bool IsPlaying() const {
         return ::IsSoundPlaying(*this);
     }
 
     /**
      * Set volume for a sound (1.0 is max level)
      */
-    inline auto SetVolume(float volume) -> Sound&
-    {
+    inline Sound& SetVolume(float volume) {
         ::SetSoundVolume(*this, volume);
         return *this;
     }
@@ -161,8 +152,7 @@ class Sound : public ::Sound {
     /**
      * Set pitch for a sound (1.0 is base level)
      */
-    inline auto SetPitch(float pitch) -> Sound&
-    {
+    inline Sound& SetPitch(float pitch) {
         ::SetSoundPitch(*this, pitch);
         return *this;
     }
@@ -170,8 +160,7 @@ class Sound : public ::Sound {
     /**
      * Set pan for a sound (0.5 is center)
      */
-    inline auto SetPan(float pan = 0.5f) -> Sound&
-    {
+    inline Sound& SetPan(float pan = 0.5f) {
         ::SetSoundPan(*this, pan);
         return *this;
     }
@@ -205,8 +194,7 @@ class Sound : public ::Sound {
      *
      * @return True or false depending on whether the Sound buffer is loaded.
      */
-    auto IsReady() const -> bool
-    {
+    bool IsReady() const {
         return ::IsSoundReady(*this);
     }
 
