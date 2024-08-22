@@ -15,10 +15,9 @@ public:
     void MoveRight();
     void FireLaser();
     std::vector<Laser> lasers;
+
 private:
     Texture2D image;
     Vector2 position;
     double last_fired_time;
-    
-
 };

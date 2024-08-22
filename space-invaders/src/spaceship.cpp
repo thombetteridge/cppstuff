@@ -8,15 +8,9 @@ Spaceship::Spaceship()
     last_fired_time = 0.0;
 }
 
-Spaceship::~Spaceship()
-{
-    UnloadTexture(image);
-}
+Spaceship::~Spaceship() { UnloadTexture(image); }
 
-auto Spaceship::Draw() -> void
-{
-    DrawTextureV(image, position, WHITE);
-}
+auto Spaceship::Draw() -> void { DrawTextureV(image, position, WHITE); }
 
 auto Spaceship::MoveLeft() -> void
 {
@@ -36,7 +30,8 @@ auto Spaceship::MoveRight() -> void
 void Spaceship::FireLaser()
 {
     if (GetTime() - last_fired_time >= 0.35) {
-        lasers.push_back(Laser({ position.x + (image.width / 2) - 2, position.y }, -6));
+        lasers.push_back(
+            Laser({ position.x + (image.width / 2) - 2, position.y }, -6));
         last_fired_time = GetTime();
     }
 }

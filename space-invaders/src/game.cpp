@@ -1,13 +1,8 @@
 #include "game.hpp"
 
-Game::Game()
-{
-    obstacles = CreateObstacles();
-}
+Game::Game() { obstacles = CreateObstacles(); }
 
-Game::~Game()
-{
-}
+Game::~Game() { }
 
 auto Game::Draw() -> void
 {
@@ -19,7 +14,6 @@ auto Game::Draw() -> void
     for (auto& obs : obstacles) {
         obs.Draw();
     }
-    
 }
 
 auto Game::Update() -> void
@@ -61,8 +55,8 @@ std::vector<Obstacle> Game::CreateObstacles()
     float gap = (GetScreenWidth() - (4 * obstacle_width)) / 5;
 
     for (int i = 0; i < 4; i++) {
-        float offset_x = (i + 1 ) * gap + i * obstacle_width;
-        obstacles.push_back(Obstacle({offset_x, float(GetScreenHeight() - 100)}));
+        float offset_x = (i + 1) * gap + i * obstacle_width;
+        obstacles.push_back(Obstacle({ offset_x, float(GetScreenHeight() - 100) }));
     }
 
     return obstacles;

@@ -2,14 +2,15 @@
 
 #include "game.hpp"
 
-int main() {
-    
+int main()
+{
+
     // Initialization
     const int screenWidth = 800;
     const int screenHeight = 600;
 
     raylib::Window w(screenWidth, screenHeight, "Space Invaders");
-    
+
     SetTargetFPS(60);
 
     Game game;
@@ -21,7 +22,7 @@ int main() {
 
         game.HandleInput();
         game.Update();
-        
+
         // Draw
         BeginDrawing();
         ClearBackground(DARKGRAY);

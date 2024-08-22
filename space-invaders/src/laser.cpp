@@ -9,7 +9,7 @@ Laser::Laser(Vector2 position, int speed)
 
 Laser::~Laser()
 {
-    // std::cout << "Laser destroyed\n"; 
+    // std::cout << "Laser destroyed\n";
 }
 
 auto Laser::Draw() -> void
