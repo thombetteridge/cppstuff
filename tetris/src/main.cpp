@@ -2,6 +2,8 @@
 
 #include "game.hpp"
 
+#include <iostream>
+
 auto main() -> int
 {
 
@@ -15,6 +17,8 @@ auto main() -> int
     SetTargetFPS(60);
 
     auto game = Game();
+
+    std::cout << "hello";
 
     // Main game loop
     while (!w.ShouldClose()) // Detect window close button or ESC key

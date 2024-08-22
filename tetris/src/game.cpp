@@ -1,6 +1,8 @@
 #include "game.hpp"
 #include "blocks.cpp"
 
+#include <iostream>
+
 Game::Game()
 {
     grid = Grid();
@@ -36,7 +38,8 @@ auto Game::getAllBlocks() -> std::vector<Block>
 void Game::draw()
 {
     grid.draw();
-    current_block.draw();
+    current_block.draw(1, 1);
+    std::cout << "game draw";
 }
 
 void Game::handleInput()

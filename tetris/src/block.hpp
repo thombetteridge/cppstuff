@@ -13,13 +13,13 @@ public:
     int id;
     std::map<int, std::vector<Position>> cells;
     Block();
-    void draw();
+    void draw(int offsetX, int offsetY);
     void move(int row, int col);
     auto getCellPosition() -> std::vector<Position>;
 
 private:
-    int cell_size { 30 };
-    int rotation { 0 };
-    int row_offset { 0 };
-    int col_offset { 0 };
+    int cell_size;
+    int rotation;
+    int row_offset;
+    int col_offset;
 };
