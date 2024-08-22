@@ -22,7 +22,7 @@ target := $(buildDir)/$(executable)
 sources := $(call rwildcard,src/,*.cpp)
 objects := $(patsubst src/%, $(buildDir)/%, $(patsubst %.cpp, %.o, $(sources)))
 depends := $(patsubst %.o, %.d, $(objects))
-compileFlags := -std=c++20 -O -isystem include -Wall -Wextra -Werror -Wpedantic -Wno-unused-function
+compileFlags := -std=c++20 -O0 -isystem include -Wall -Wextra -Werror -Wpedantic -Wno-unused-function
 linkFlags = -L lib/$(platform) -l raylib
 
 # Check for Windows

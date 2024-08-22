@@ -8,16 +8,19 @@
 
 #include "../include/raylib-cpp.hpp"
 
-class Block {
-public:
+class Block
+{
+  public:
     int id;
     std::map<int, std::vector<Position>> cells;
     Block();
     void draw(int offsetX, int offsetY);
     void move(int row, int col);
     auto getCellPosition() -> std::vector<Position>;
+    void rotate();
+    void undoRotate();
 
-private:
+  private:
     int cell_size;
     int rotation;
     int row_offset;

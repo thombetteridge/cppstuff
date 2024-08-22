@@ -4,6 +4,19 @@
 
 #include <iostream>
 
+double last_update_time = 0;
+
+bool event_triggered(double interval)
+{
+    double current_time = GetTime();
+    if (current_time - last_update_time >= interval)
+    {
+        last_update_time = current_time;
+        return true;
+    }
+    return false;
+}
+
 auto main() -> int
 {
 
@@ -24,6 +37,11 @@ auto main() -> int
     while (!w.ShouldClose()) // Detect window close button or ESC key
     {
         // Update
+        game.handleInput();
+        if (event_triggered(0.2))
+        {
+            game.moveBlockDown();
+        }
 
         // TODO: Update your variables here
 

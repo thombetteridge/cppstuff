@@ -6,8 +6,9 @@
 #include "block.hpp"
 #include "grid.hpp"
 
-class Game {
-public:
+class Game
+{
+  public:
     Grid grid;
 
     Game();
@@ -18,8 +19,17 @@ public:
 
     void draw();
     void handleInput();
+    void moveBlockLeft();
+    void moveBlockRight();
+    void moveBlockDown();
 
-private:
+    bool game_over;
+
+  private:
+    bool isBlockOutside();
+    void rotateBlock();
+    void lockBlock();
+    bool blockFits();
     std::vector<Block> blocks;
     Block current_block;
     Block next_block;
