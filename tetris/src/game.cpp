@@ -39,7 +39,6 @@ void Game::draw()
 {
     grid.draw();
     current_block.draw(1, 1);
-    std::cout << "game draw";
 }
 
 void Game::handleInput()
