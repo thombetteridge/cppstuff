@@ -3,144 +3,148 @@
 
 Game::Game()
 {
-    grid = Grid();
-    blocks = getAllBlocks();
-    current_block = getRandomBlock();
-    next_block = getRandomBlock();
-    game_over = false;
+  grid          = Grid();
+  blocks        = getAllBlocks();
+  current_block = getRandomBlock();
+  next_block    = getRandomBlock();
+  game_over     = false;
 }
 
 auto Game::getRandomBlock() -> Block
 {
-    if (blocks.empty())
-    {
-        blocks = getAllBlocks();
-    }
-    auto index = GetRandomValue(0, static_cast<int>(blocks.size()) - 1);
-    auto block = blocks[index];
-    blocks.erase(blocks.begin() + index);
-    return block;
+  if (blocks.empty())
+  {
+    blocks = getAllBlocks();
+  }
+  auto index = GetRandomValue(0, static_cast<int>(blocks.size()) - 1);
+  auto block = blocks[index];
+  blocks.erase(blocks.begin() + index);
+  return block;
 }
 
 auto Game::getAllBlocks() -> std::vector<Block>
 {
-    return {TBlock(), IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), ZBlock()};
+  return {
+    TBlock(), IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), ZBlock()
+  };
 }
 
 void Game::draw()
 {
-    grid.draw();
-    current_block.draw(1, 1);
+  grid.draw();
+  current_block.draw(1, 1);
 }
 
 void Game::handleInput()
 {
-    int key_pressed = GetKeyPressed();
+  int key_pressed = GetKeyPressed();
 
-    switch (key_pressed)
-    {
+  switch (key_pressed)
+  {
     case KEY_LEFT:
-        moveBlockLeft();
-        break;
+      moveBlockLeft();
+      break;
     case KEY_RIGHT:
-        moveBlockRight();
-        break;
+      moveBlockRight();
+      break;
     case KEY_DOWN:
-        moveBlockDown();
-        break;
+      moveBlockDown();
+      break;
     case KEY_UP:
-        rotateBlock();
-        break;
+      rotateBlock();
+      break;
     default:
-        break;
-    }
+      break;
+  }
 }
 
 void Game::moveBlockLeft()
 {
-    if (!game_over)
+  if (!game_over)
+  {
+    current_block.move(0, -1);
+    if (isBlockOutside() || blockFits() == false)
     {
-        current_block.move(0, -1);
-        if (isBlockOutside() || blockFits() == false)
-        {
-            current_block.move(0, 1);
-        }
+      current_block.move(0, 1);
     }
+  }
 }
+
 void Game::moveBlockRight()
 {
-    if (!game_over)
+  if (!game_over)
+  {
+    current_block.move(0, 1);
+    if (isBlockOutside() || blockFits() == false)
     {
-        current_block.move(0, 1);
-        if (isBlockOutside() || blockFits() == false)
-        {
-            current_block.move(0, -1);
-        }
+      current_block.move(0, -1);
     }
+  }
 }
 
 void Game::moveBlockDown()
 {
-    if (!game_over)
-    {
-        current_block.move(1, 0);
-        if (isBlockOutside() || blockFits() == false)
-        {
-            current_block.move(-1, 0);
-            lockBlock();
-        }
-    }
-}
-void Game::rotateBlock()
-{
-    if (!game_over)
-    {
-        current_block.rotate();
-    }
+  if (!game_over)
+  {
+    current_block.move(1, 0);
     if (isBlockOutside() || blockFits() == false)
     {
-        current_block.undoRotate();
+      current_block.move(-1, 0);
+      lockBlock();
     }
+  }
+}
+
+void Game::rotateBlock()
+{
+  if (!game_over)
+  {
+    current_block.rotate();
+  }
+  if (isBlockOutside() || blockFits() == false)
+  {
+    current_block.undoRotate();
+  }
 }
 
 auto Game::isBlockOutside() -> bool
 {
-    auto tiles = current_block.getCellPosition();
-    for (auto item : tiles)
+  auto tiles = current_block.getCellPosition();
+  for (const auto& item : tiles)
+  {
+    if (grid.isCellOutside(item.row, item.column))
     {
-        if (grid.isCellOutside(item.row, item.column))
-        {
-            return true;
-        }
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 void Game::lockBlock()
 {
-    auto tiles = current_block.getCellPosition();
-    for (auto item : tiles)
-    {
-        grid.grid[item.row][item.column] = current_block.id;
-    }
-    current_block = next_block;
-    if (blockFits() == false)
-    {
-        game_over = true;
-    }
-    next_block = getRandomBlock();
-    grid.clearFullRoads();
+  auto tiles = current_block.getCellPosition();
+  for (const auto& item : tiles)
+  {
+    grid.grid[item.row][item.column] = current_block.id;
+  }
+  current_block = next_block;
+  if (blockFits() == false)
+  {
+    game_over = true;
+  }
+  next_block = getRandomBlock();
+  grid.clearFullRoads();
 }
 
 auto Game::blockFits() -> bool
 {
-    auto tiles = current_block.getCellPosition();
-    for (auto item : tiles)
+  auto tiles = current_block.getCellPosition();
+  for (const auto& item : tiles)
+  {
+    if (grid.isCellEmpty(item.row, item.column) == false)
     {
-        if (grid.isCellEmpty(item.row, item.column) == false)
-        {
-            return false;
-        }
+      return false;
     }
-    return true;
+  }
+  return true;
 }

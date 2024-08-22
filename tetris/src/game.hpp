@@ -8,29 +8,28 @@
 
 class Game
 {
-  public:
-    Grid grid;
+public:
+  Grid grid;
 
-    Game();
+  Game();
 
-    auto getRandomBlock() -> Block;
+  auto getRandomBlock() -> Block;
+  auto getAllBlocks() -> std::vector<Block>;
+  void draw();
+  void handleInput();
+  void moveBlockLeft();
+  void moveBlockRight();
+  void moveBlockDown();
 
-    auto getAllBlocks() -> std::vector<Block>;
+  bool game_over;
 
-    void draw();
-    void handleInput();
-    void moveBlockLeft();
-    void moveBlockRight();
-    void moveBlockDown();
+private:
+  auto isBlockOutside() -> bool;
+  auto blockFits() -> bool;
+  void rotateBlock();
+  void lockBlock();
 
-    bool game_over;
-
-  private:
-    bool isBlockOutside();
-    void rotateBlock();
-    void lockBlock();
-    bool blockFits();
-    std::vector<Block> blocks;
-    Block current_block;
-    Block next_block;
+  std::vector<Block> blocks;
+  Block              current_block;
+  Block              next_block;
 };
