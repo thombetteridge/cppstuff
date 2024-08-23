@@ -4,7 +4,7 @@
 
 double last_update_time = 0;
 
-bool event_triggered(double interval)
+auto event_triggered(double interval) -> bool
 {
   double current_time = GetTime();
   if (current_time - last_update_time >= interval)
@@ -21,7 +21,7 @@ auto main() -> int
   const int screenWidth  = 300;
   const int screenHeight = 600;
 
-  double game_speed = 0.2;
+  const double game_speed = 0.2;
 
   raylib::Color  textColor(LIGHTGRAY);
   raylib::Window w(screenWidth, screenHeight, "Raylib C++ Starter Kit Example");

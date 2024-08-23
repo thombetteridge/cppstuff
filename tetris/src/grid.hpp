@@ -4,8 +4,9 @@
 #include <map>
 #include <vector>
 
-static const std::vector<Color> Colours
-  = { RAYWHITE, GREEN, RED, ORANGE, YELLOW, PURPLE, SKYBLUE, BLUE };
+static const std::vector<Color> Colours = {
+  RAYWHITE, GREEN, RED, ORANGE, YELLOW, PURPLE, SKYBLUE, BLUE,
+};
 
 class Grid
 {
@@ -18,12 +19,12 @@ public:
   void draw();
   auto isCellOutside(int row, int column) -> bool;
   auto isCellEmpty(int row, int column) -> bool;
-  int  clearFullRoads();
+  auto clearFullRoads() -> int;
 
 private:
-  int num_rows { 20 };
-  int num_cols { 10 };
-  int cell_size { 30 };
+  static const int num_rows  = 20;
+  static const int num_cols  = 10;
+  static const int cell_size = 30;
 
   auto isRowFull(int row) -> bool;
   void clearRow(int row);
