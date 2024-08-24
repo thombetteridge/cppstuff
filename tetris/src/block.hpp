@@ -13,7 +13,7 @@ public:
   std::map<int, std::vector<Position>> cells;
 
   Block();
-  void draw(int offsetX, int offsetY);
+  void draw();
   void move(int row, int col);
   auto getCellPosition() -> std::vector<Position>;
   void rotate();

@@ -8,13 +8,13 @@ Block::Block()
   col_offset = 0;
 }
 
-void Block::draw(int offsetX, int offsetY)
+void Block::draw()
 {
   auto tiles = getCellPosition();
   for (const auto& item : tiles)
   {
-    DrawRectangle(item.column * cell_size + offsetX,
-                  item.row * cell_size + offsetY,
+    DrawRectangle(item.column * cell_size + 11,
+                  item.row * cell_size + 11,
                   cell_size - 1,
                   cell_size - 1,
                   Colours[id]);

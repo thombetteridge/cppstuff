@@ -14,6 +14,7 @@ public:
   Grid();
   std::vector<std::vector<int>> grid;
 
+  void initialize();
   void random_grid();
   void print();
   void draw();

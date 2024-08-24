@@ -1,7 +1,9 @@
 #include "grid.hpp"
 #include <iostream>
 
-Grid::Grid()
+Grid::Grid() { initialize(); }
+
+void Grid::initialize()
 {
   grid = std::vector<std::vector<int>>(num_rows, std::vector<int>(num_cols, 0));
 }
@@ -24,8 +26,8 @@ void Grid::draw()
     for (int col = 0; col < num_cols; col++)
     {
       int cell_value = grid[row][col];
-      DrawRectangle(col * cell_size + 1,
-                    row * cell_size + 1,
+      DrawRectangle(col * cell_size + 11,
+                    row * cell_size + 11,
                     cell_size - 1,
                     cell_size - 1,
                     Colours[cell_value]);

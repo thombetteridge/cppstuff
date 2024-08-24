@@ -8,6 +8,7 @@ Game::Game()
   current_block = getRandomBlock();
   next_block    = getRandomBlock();
   game_over     = false;
+  score         = 0;
 }
 
 auto Game::getRandomBlock() -> Block
@@ -32,12 +33,18 @@ auto Game::getAllBlocks() -> std::vector<Block>
 void Game::draw()
 {
   grid.draw();
-  current_block.draw(1, 1);
+  current_block.draw();
 }
 
 void Game::handleInput()
 {
   int key_pressed = GetKeyPressed();
+
+  if (game_over && key_pressed != 0)
+  {
+    game_over = false;
+    reset();
+  }
 
   switch (key_pressed)
   {
@@ -91,7 +98,9 @@ void Game::moveBlockDown()
     {
       current_block.move(-1, 0);
       lockBlock();
+      return;
     }
+    updateScore(0, 1);
   }
 }
 
@@ -132,8 +141,9 @@ void Game::lockBlock()
   {
     game_over = true;
   }
-  next_block = getRandomBlock();
-  grid.clearFullRoads();
+  next_block       = getRandomBlock();
+  int rows_cleared = grid.clearFullRoads();
+  updateScore(rows_cleared, 0);
 }
 
 auto Game::blockFits() -> bool
@@ -147,4 +157,32 @@ auto Game::blockFits() -> bool
     }
   }
   return true;
+}
+
+void Game::reset()
+{
+  grid.initialize();
+  blocks        = getAllBlocks();
+  current_block = getRandomBlock();
+  next_block    = getRandomBlock();
+  score         = 0;
+}
+
+void Game::updateScore(int lines_cleared, int move_down_points)
+{
+  switch (lines_cleared)
+  {
+    case 1:
+      score += 100;
+      break;
+    case 2:
+      score += 300;
+      break;
+    case 3:
+      score += 500;
+      break;
+    default:
+      break;
+  }
+  score += move_down_points;
 }
